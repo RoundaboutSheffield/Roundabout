@@ -15,9 +15,29 @@
       var nga = NgAdminConfigurationProvider;
       // create an admin application
       var admin = nga.application('My First Admin');
-      // more configuration here later
-      // ...
-      // attach the admin application to the DOM and run it
+
+      var message = nga.entity('messages');
+
+      message.listView()
+        .fields([
+          nga.field('from'),
+          nga.field('to'),
+          nga.field('message')
+        ]);
+
+      var contact = nga.entity('contacts');
+
+      contact.listView()
+        .fields([
+          nga.field('name'),
+          nga.field('lastName'),
+          nga.field('phoneNumber')
+        ]);
+
+      admin
+        .addEntity(message)
+        .addEntity(contact);
+
       nga.configure(admin);
   }]);
   </script>
