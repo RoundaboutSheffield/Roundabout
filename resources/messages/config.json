@@ -1,0 +1,29 @@
+{
+	"type": "Collection",
+	"properties": {
+		"from": {
+			"name": "from",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "from",
+			"order": 0
+		},
+		"to": {
+			"name": "to",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "to",
+			"order": 1
+		},
+		"message": {
+			"name": "message",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "message",
+			"order": 2
+		}
+	}
+}
