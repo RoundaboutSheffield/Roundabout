@@ -1,0 +1,37 @@
+{
+	"type": "Collection",
+	"properties": {
+		"date": {
+			"name": "date",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "date",
+			"order": 0
+		},
+		"message": {
+			"name": "message",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "message",
+			"order": 1
+		},
+		"contactIds": {
+			"name": "contactIds",
+			"type": "array",
+			"typeLabel": "array",
+			"required": true,
+			"id": "contactIds",
+			"order": 2
+		},
+		"keyWorkerSignatureId": {
+			"name": "keyWorkerSignatureId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "keyWorkerSignatureId",
+			"order": 3
+		}
+	}
+}

@@ -24,6 +24,14 @@
 			"required": true,
 			"id": "phoneNumber",
 			"order": 2
+		},
+		"isKeyWorker": {
+			"name": "isKeyWorker",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": true,
+			"id": "isKeyWorker",
+			"order": 3
 		}
 	}
 }
