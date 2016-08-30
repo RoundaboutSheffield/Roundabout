@@ -25,6 +25,14 @@
           nga.field('message')
         ]);
 
+      message.creationView()
+        .fields([
+          nga.field('from'),
+          nga.field('to'),
+          nga.field('message', 'text')
+        ]);
+
+
       var contact = nga.entity('contacts');
 
       contact.listView()
@@ -42,6 +50,7 @@
           nga.field('phoneNumber'),
           nga.field('isKeyWorker', 'boolean')
         ]);
+
 
       admin
         .addEntity(message)
