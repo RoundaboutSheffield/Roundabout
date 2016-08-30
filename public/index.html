@@ -31,8 +31,13 @@
         .fields([
           nga.field('name'),
           nga.field('lastName'),
-          nga.field('phoneNumber')
+          nga.field('phoneNumber'),
+          nga.field('isKeyWorker')
         ]);
+
+        var users = nga.entity('admins');
+
+
 
       admin
         .addEntity(message)
