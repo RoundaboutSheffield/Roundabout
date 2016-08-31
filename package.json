@@ -1,0 +1,41 @@
+{
+  "name": "Roundabout",
+  "version": "1.0.0",
+  "description": "GitHub Reference Guide - courtesy of DWYL",
+  "main": "index.js",
+  "scripts": {
+    "start": "dpd",
+    "build": "webpack",
+    "webpack-watch": "webpack --watch",
+    "watch": "npm-run-all --parallel start webpack-watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RoundaboutSheffield/Roundabout.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RoundaboutSheffield/Roundabout/issues"
+  },
+  "homepage": "https://github.com/RoundaboutSheffield/Roundabout#readme",
+  "dependencies": {
+    "deployd": "^0.8.9",
+    "env2": "^2.1.1",
+    "nexmo": "^1.0.0-beta-7"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "browser-sync": "^2.14.3",
+    "browser-sync-webpack-plugin": "^1.1.2",
+    "css-loader": "^0.24.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "ng-admin": "^1.0.0-alpha2",
+    "npm-run-all": "^3.0.0",
+    "webpack": "^1.13.2"
+  }
+}
