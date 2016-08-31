@@ -35,7 +35,7 @@ $ NEXMO_API=YOUR_API_CODE NEXMO_SECRET=YOUR_API_SECRET npm start
 ```bash
 $ sudo mongod # run mongodb database
 
-$ NEXMO_API=YOUR_API_CODE NEXMO_SECRET=YOUR_API_SECRET npm run watch
+$ NEXMO_KEY=YOUR_API_CODE NEXMO_SECRET=YOUR_API_SECRET npm run watch
 ```
 
 Wait until browser shows up
