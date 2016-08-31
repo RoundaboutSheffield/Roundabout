@@ -16,12 +16,6 @@ This project creates a text messaging system using the following frameworks:
 
 * Ng-Admin
 
-### Deployd
-
-### Nexmo
-
-### Ng-Admin
-
 ## Set up and running
 
 ```bash
