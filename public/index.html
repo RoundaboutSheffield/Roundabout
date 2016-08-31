@@ -25,6 +25,15 @@
           nga.field('message')
         ]);
 
+      message.creationView()
+        .fields([
+          nga.field('from'),
+          nga.field('toIds', 'reference_many')
+            .targetEntity(nga.entity('contacts'))
+            .targetField(nga.field('fullName')),
+          nga.field('message', 'text')
+        ]);
+
       var contact = nga.entity('contacts');
 
       contact.listView()
@@ -35,8 +44,13 @@
           nga.field('isKeyWorker')
         ]);
 
-        var users = nga.entity('admins');
-
+      contact.creationView()
+        .fields([
+          nga.field('name'),
+          nga.field('lastName'),
+          nga.field('phoneNumber'),
+          nga.field('isKeyWorker', 'boolean')
+        ]);
 
 
       admin

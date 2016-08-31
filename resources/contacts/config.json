@@ -29,7 +29,7 @@
 			"name": "isKeyWorker",
 			"type": "boolean",
 			"typeLabel": "boolean",
-			"required": true,
+			"required": false,
 			"id": "isKeyWorker",
 			"order": 3
 		}
