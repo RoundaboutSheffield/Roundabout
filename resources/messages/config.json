@@ -1,13 +1,21 @@
 {
 	"type": "Collection",
 	"properties": {
+		"from": {
+			"name": "from",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "from",
+			"order": 0
+		},
 		"to": {
 			"name": "to",
 			"type": "array",
 			"typeLabel": "array",
 			"required": true,
 			"id": "to",
-			"order": 0
+			"order": 1
 		},
 		"message": {
 			"name": "message",
@@ -15,7 +23,15 @@
 			"typeLabel": "string",
 			"required": true,
 			"id": "message",
-			"order": 1
+			"order": 2
+		},
+		"timestamp": {
+			"name": "timestamp",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "timestamp",
+			"order": 3
 		}
 	}
 }
