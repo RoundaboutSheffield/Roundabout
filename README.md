@@ -22,4 +22,21 @@ This project creates a text messaging system using the following frameworks:
 
 ### Ng-Admin
 
+## Set up and running
+
+```bash
+$ sudo mongod # run mongodb database
+
+$ NEXMO_API=YOUR_API_CODE NEXMO_SECRET=YOUR_API_SECRET npm start
+```
+
+## Run in development mode
+
+```bash
+$ sudo mongod # run mongodb database
+
+$ NEXMO_API=YOUR_API_CODE NEXMO_SECRET=YOUR_API_SECRET npm run watch
+```
+
+Wait until browser shows up
 
