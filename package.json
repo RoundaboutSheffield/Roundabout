@@ -36,6 +36,7 @@
     "css-loader": "^0.24.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "jquery": "^3.1.0",
+    "moment": "^2.14.1",
     "ng-admin": "^1.0.0-alpha2",
     "npm-run-all": "^3.0.0",
     "webpack": "^1.13.2"
