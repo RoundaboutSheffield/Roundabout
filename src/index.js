@@ -1,48 +1,66 @@
-  var myApp = angular.module('myApp', ['ng-admin']);
-  myApp.config(['NgAdminConfigurationProvider', function(NgAdminConfigurationProvider) {
-      var nga = NgAdminConfigurationProvider;
-      // create an admin application
-      var admin = nga.application('My First Admin');
+require('ng-admin');
 
-      var message = nga.entity('messages');
+angular.module('myApp', ['ng-admin'])
+  .config(['NgAdminConfigurationProvider', nga => {
+    const admin = nga.application('RoundAbout');
 
-      message.listView()
-        .fields([
-          nga.field('to'),
-          nga.field('message')
-        ]);
+    require('./entity/messages')(nga, admin);
+    require('./entity/contacts')(nga, admin);
 
-      message.creationView()
-        .fields([
-          nga.field('to', 'reference_many')
-            .targetEntity(nga.entity('contacts'))
-            .targetField(nga.field('fullName')),
-          nga.field('message', 'text')
-        ]);
+    nga.configure(admin);
+  }])
+  .factory('serializeParams', [function() {
+    return {
+      request: function(config) {
+        config.paramSerializer = (param) => param;
+        config.params = JSON.stringify(config.params) || {};
+        return config;
+      }
+    };
+  }])
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('serializeParams');
+  }])
+  .config(['RestangularProvider', function(RestangularProvider) {
+    RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params, httpConfig) {
+      if (operation == 'getList') {
+        const dir = params._sortDir === 'DESC' ? -1 : 1;
+        const sort = {};
 
-      var contact = nga.entity('contacts');
+        params.$skip = (params._page - 1) * params._perPage;
+        params.$limit = params._perPage;
 
-      contact.listView()
-        .fields([
-          nga.field('name'),
-          nga.field('lastName'),
-          nga.field('phoneNumber'),
-          nga.field('isKeyWorker')
-        ]);
+        if (params._sortField) {
+          sort[params._sortField] = dir;
+          params.$sort = sort;
+        }
 
-      contact.creationView()
-        .fields([
-          nga.field('name'),
-          nga.field('lastName'),
-          nga.field('phoneNumber'),
-          nga.field('isKeyWorker', 'boolean')
-        ]);
+        delete params._page;
+        delete params._perPage;
+        delete params._sortField;
+        delete params._sortDir;
+      }
 
+      if (operation == 'getList' && params._filters) {
+        Object.keys(params._filters).reduce((acc, filter) => {
+          if (filter === 'id') {
+            acc[filter] = {
+              $in: params._filters[filter]
+            };
+            return acc;
+          }
 
-      admin
-        .addEntity(message)
-        .addEntity(contact);
+          acc[filter] = {
+            $regex: params._filters[filter],
+            $options: 'i'
+          };
 
-      nga.configure(admin);
+          return acc;
+        }, params);
+
+        delete params._filters;
+      }
+
+      return { params: params };
+    });
   }]);
-

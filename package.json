@@ -30,10 +30,13 @@
     "babel": "^6.5.2",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
     "browser-sync": "^2.14.3",
     "browser-sync-webpack-plugin": "^1.1.2",
     "css-loader": "^0.24.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "jquery": "^3.1.0",
+    "moment": "^2.14.1",
     "ng-admin": "^1.0.0-alpha2",
     "npm-run-all": "^3.0.0",
     "webpack": "^1.13.2"
