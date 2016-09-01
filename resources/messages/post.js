@@ -6,10 +6,13 @@ const apiSecret = process.env.NEXMO_SECRET;
 const debug = process.env.DEBUG;
 
 const nexmo = new Nexmo({apiKey, apiSecret}, {debug});
-const { to, message } = this;
+const { from, to, message } = this;
+
+this.timestamp = Date.now();
 
 Promise.all(to.map(id => dpd.contacts.get(id)))
-    .then(contacts =>
-        contacts.forEach(contact =>
-            nexmo.message.sendSms('NEXMO', contact.phoneNumber, message))
-    )
+    .then(contacts => contacts.map(contact => contact.phoneNumber))
+    .then(phoneNumbers => {
+        phoneNumbers.forEach(phone =>
+            nexmo.message.sendSms(from, phone, message))
+    })
