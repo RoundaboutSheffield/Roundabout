@@ -10,7 +10,7 @@ const { from, to, message } = this;
 
 this.timestamp = Date.now();
 
-Promise.all(to.map(id => dpd.contacts.get(id)))
+dpd.contacts.get(`?{"id":{"$in":${to}}}`)
     .then(contacts => contacts.map(contact => contact.phoneNumber))
     .then(phoneNumbers => {
         phoneNumbers.forEach(phone =>
