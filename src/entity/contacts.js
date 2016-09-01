@@ -2,9 +2,16 @@ module.exports = (nga, admin) => {
   const contact = nga.entity('contacts');
 
   const fields = [
-    nga.field('name'),
+    nga.field('name')
+      .validation({
+        required: true
+      }),
     nga.field('lastName'),
-    nga.field('phoneNumber'),
+    nga.field('phoneNumber')
+      .validation({
+        required: true,
+        pattern: '\+\d+?'
+      }),
   ];
 
   contact
@@ -21,4 +28,6 @@ module.exports = (nga, admin) => {
 
   admin
     .addEntity(contact);
+
+  return contact;
 };

@@ -1,13 +1,18 @@
 require('ng-admin');
 
-angular.module('myApp', ['ng-admin'])
+angular.module('roundAbout', ['ng-admin'])
   .config(['NgAdminConfigurationProvider', nga => {
     const admin = nga.application('RoundAbout');
 
-    require('./entity/messages')(nga, admin);
-    require('./entity/contacts')(nga, admin);
+    const message = require('./entity/messages')(nga, admin);
+    const contact = require('./entity/contacts')(nga, admin);
 
     nga.configure(admin);
+
+    admin.menu(nga.menu()
+        .addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>'))
+        .addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>'))
+    );
   }])
   .factory('serializeParams', [function() {
     return {
