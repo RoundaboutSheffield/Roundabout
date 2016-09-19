@@ -6,15 +6,10 @@ body {
   background-color: #F6F6F6;
 }
 
-.login-background {
-  background-color: #00B6DE;
-}
-
 .login-container {
   background-color: #FFFFFF;
   padding: 1em;
   margin-top: 3em;
-  // border-color: #00B6DE;
   border-radius: 10px;
   border-top-color: #00B6DE;
 }
@@ -34,12 +29,6 @@ body {
 
 .login_button:focus {
     outline:none !important;
-}
-
-.form-signin-heading {
-  font-size: 2.5em;
-  font-family: 'Patua One', bold;
-
 }
 
 .logo-container {

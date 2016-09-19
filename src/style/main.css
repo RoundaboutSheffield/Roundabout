@@ -1,8 +1,9 @@
+html, body {
+  height: 100%;
+}
+
 body {
   background-color: #F6F6F6; }
-
-.login-background {
-  background-color: #00B6DE; }
 
 .login-container {
   background-color: #FFFFFF;
@@ -24,12 +25,6 @@ body {
 .login_button:focus {
   outline: none !important; }
 
-.form-signin-heading {
-  font-size: 2.5em;
-  font-family: 'Patua One', bold; }
-
 .logo-container {
   padding: 2.5em;
   position: center; }
-
-/*# sourceMappingURL=main.css.map */

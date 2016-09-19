@@ -3,11 +3,12 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const sources = [
   './node_modules/ng-admin/build/ng-admin.min.css',
-  './src/index.js'
+  './src/style/main.css',
+  './src/index.js',
 ];
 
 module.exports = {
-  entry: ['./src/index.js'],
+  entry: sources,
   output: {
     path: __dirname + '/public/js',
     filename: '[name].js'
