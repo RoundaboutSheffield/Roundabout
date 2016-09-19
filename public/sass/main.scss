@@ -1,0 +1,35 @@
+@import 'variables';
+
+// login.html
+
+// .body {
+//   background-color: #00B6DE;
+// }
+
+.login-background {
+  background-color: #F6F6F6;
+}
+
+.login-container {
+  background-color: #F6F6F6;
+  padding: 1em;
+  margin-top: 3em;
+  // border-color: #00B6DE;
+  border-radius: 10px;
+  border-top-color: #00B6DE;
+}
+
+.button_login {
+  color: #00B6DE;
+}
+
+.form-signin-heading {
+  font-size: 2.5em;
+  font-family: 'Patua One', bold;
+
+}
+
+.logo-container {
+  padding: 2.5em;
+  position: center;
+}
