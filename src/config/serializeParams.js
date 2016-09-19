@@ -35,9 +35,7 @@ module.exports = app => app
         if (operation === 'getList' && params._filters) {
           Object.keys(params._filters).reduce((acc, filter) => {
             if (filter === 'id') {
-              const idFilter = {
-                $in: params._filters[filter],
-              };
+              const idFilter = params._filters[filter];
               return Object.assign(acc, { [filter]: idFilter });
             }
 

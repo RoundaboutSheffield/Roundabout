@@ -4,13 +4,12 @@ module.exports = (nga, admin) => {
   const fields = [
     nga.field('name')
       .validation({
-        required: true
+        required: true,
       }),
     nga.field('lastName'),
     nga.field('phoneNumber')
       .validation({
         required: true,
-        pattern: '\+\d+?'
       }),
   ];
 
@@ -18,7 +17,7 @@ module.exports = (nga, admin) => {
     .listView()
     .fields([
       nga.field('id'),
-      ...fields
+      ...fields,
     ])
     .filters(fields);
 
