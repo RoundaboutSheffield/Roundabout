@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700|Source+Sans+Pro:200,300,400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="background">
+    <div class="container">
+      <form class="form-signin">
+        <div class="logo-container">
+        <img class="logo" src="./assets/Logo.png"/>
+        </div>
+        <h2 class="form-signin-heading">Formulate</h2>
+        <div class="form-group">
+          <label form="inputEmail" class="sr-only">Email address</label>
+          <input type="text" id="userNameInput" name="username" class="form-control" placeholder="Username" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+        <button class="btn btn-md btn-block sign-in-btn" class="button" id="login" type="submit">Sign in</button>
+
+
+  <script type="text/javascript" src="dpd.js"></script>
+  <script type="text/javascript" charset="utf-8">
+  var form = document.querySelector('form');
+  var login = document.getElementById('login');
+  var loginUser = function(username, password) {
+    dpd
+      .users
+      .login({
+        username: username,
+        password: password
+      })
+      .then(function(e){
+        location.pathname = '/app.html';
+      })
+      .fail(function(error){
+        alert(error.message);
+      });
+  }
+  login.addEventListener('click', function(event) {
+    var username = form.username.value;
+    var password = form.password.value;
+    event.preventDefault();
+    loginUser(username, password);
+  });
+  </script>
+</body>
+</html>
