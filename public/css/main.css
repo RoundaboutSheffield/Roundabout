@@ -1,15 +1,22 @@
-.login-background {
+body {
   background-color: #F6F6F6; }
 
+.login-background {
+  background-color: #00B6DE; }
+
 .login-container {
-  background-color: #F6F6F6;
+  background-color: #FFFFFF;
   padding: 1em;
   margin-top: 3em;
   border-radius: 10px;
   border-top-color: #00B6DE; }
 
+.form-group {
+  font-family: Helvetica; }
+
 .login_button {
-  background-color: #00B6DE; }
+  background-color: #00B6DE;
+  font-family: Helvetica; }
 
 .login_button:hover {
   background-color: #91C849; }

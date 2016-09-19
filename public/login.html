@@ -19,14 +19,12 @@
         <img class="logo" src="../assets/logo.png"/>
         </div>
           <div class="form-group">
-          <label form="inputEmail" class="sr-only">Email address</label>
           <input type="text" id="userNameInput" name="username" class="form-control" placeholder="Username" required autofocus>
         </div>
         <div class="form-group">
-          <label for="inputPassword" class="sr-only">Password</label>
           <input type="password" name="password" class="form-control" placeholder="Password" required>
         </div>
-        <button class="login_button btn btn-md btn-block sign-in-btn" class="button" id="login" type="submit">Sign in</button>
+        <button class="login_button btn btn-md btn-block sign-in-btn" class="button" id="login" type="submit"><b>Sign in</b></button>
 </div>
 </div>
 
@@ -42,7 +40,7 @@
         password: password
       })
       .then(function(e){
-        location.pathname = '/app.html';
+        location.pathname = '/index.html';
       })
       .fail(function(error){
         alert(error.message);
