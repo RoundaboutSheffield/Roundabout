@@ -1,13 +1,29 @@
 {
 	"type": "Collection",
 	"properties": {
+		"title": {
+			"name": "title",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "title",
+			"order": 0
+		},
+		"to": {
+			"name": "to",
+			"type": "array",
+			"typeLabel": "array",
+			"required": true,
+			"id": "to",
+			"order": 1
+		},
 		"date": {
 			"name": "date",
 			"type": "string",
 			"typeLabel": "string",
 			"required": true,
 			"id": "date",
-			"order": 0
+			"order": 2
 		},
 		"message": {
 			"name": "message",
@@ -15,15 +31,7 @@
 			"typeLabel": "string",
 			"required": true,
 			"id": "message",
-			"order": 1
-		},
-		"contactIds": {
-			"name": "contactIds",
-			"type": "array",
-			"typeLabel": "array",
-			"required": true,
-			"id": "contactIds",
-			"order": 2
+			"order": 3
 		},
 		"keyWorkerSignatureId": {
 			"name": "keyWorkerSignatureId",
@@ -31,7 +39,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "keyWorkerSignatureId",
-			"order": 3
+			"order": 4
 		}
 	}
 }

@@ -54,16 +54,18 @@
 	__webpack_require__(2);
 	const messageEntity = __webpack_require__(3);
 	const contactEntity = __webpack_require__(4);
+	const appointmentEntity = __webpack_require__(6);
 
 	const app = angular.module('roundAbout', ['ng-admin']).config(['NgAdminConfigurationProvider', nga => {
 	  const admin = nga.application('RoundAbout');
 
 	  const message = messageEntity(nga, admin);
 	  const contact = contactEntity(nga, admin);
+	  const appointment = appointmentEntity(nga, admin);
 
 	  nga.configure(admin);
 
-	  admin.menu(nga.menu().addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')));
+	  admin.menu(nga.menu().addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')));
 	}]);
 
 	__webpack_require__(5)(app);
@@ -203,7 +205,9 @@
 	    required: true
 	  })]);
 
-	  message.showView().fields([nga.field('from'), nga.field('to', 'reference_many').targetEntity(nga.entity('contacts')).targetField(nga.field('fullName')).singleApiCall(ids => ({ 'id': ids })), nga.field('timestamp', 'datetime').label('Date').format('dd-MM-yyyy HH:mm:ss'), nga.field('message', 'text')]);
+	  message.showView().fields([nga.field('from'), nga.field('to', 'reference_many').targetEntity(nga.entity('contacts')).targetField(nga.field('fullName')).singleApiCall(ids => ({
+	    id: { $in: ids }
+	  })), nga.field('timestamp', 'datetime').label('Date').format('dd-MM-yyyy HH:mm:ss'), nga.field('message', 'text')]);
 
 	  admin.addEntity(message);
 
@@ -220,8 +224,7 @@
 	  const fields = [nga.field('name').validation({
 	    required: true
 	  }), nga.field('lastName'), nga.field('phoneNumber').validation({
-	    required: true,
-	    pattern: '\+\d+?'
+	    required: true
 	  })];
 
 	  contact.listView().fields([nga.field('id'), ...fields]).filters(fields);
@@ -270,9 +273,7 @@
 	    if (operation === 'getList' && params._filters) {
 	      Object.keys(params._filters).reduce((acc, filter) => {
 	        if (filter === 'id') {
-	          const idFilter = {
-	            $in: params._filters[filter]
-	          };
+	          const idFilter = params._filters[filter];
 	          return Object.assign(acc, { [filter]: idFilter });
 	        }
 
@@ -292,6 +293,32 @@
 	    return { params };
 	  });
 	}]);
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = (nga, admin) => {
+	  const appointment = nga.entity('appointments');
+
+	  const fields = [nga.field('title'), nga.field('to', 'reference_many').targetEntity(nga.entity('contacts')).targetField(nga.field('fullName')).validation({
+	    required: true
+	  }), nga.field('date', 'datetime').validation({
+	    required: true
+	  }), nga.field('message', 'text').validation({
+	    required: true
+	  })];
+
+	  appointment.listView().fields([nga.field('id'), ...fields]).filters(fields);
+
+	  appointment.creationView().fields(fields);
+
+	  appointment.editionView().fields(fields);
+
+	  admin.addEntity(appointment);
+
+	  return appointment;
+	};
 
 /***/ }
 /******/ ]);
