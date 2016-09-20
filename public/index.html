@@ -35,7 +35,7 @@ var loginUser = function(username, password) {
       password: password
     })
   .then(function(e){
-    location.pathname = '/index.html';
+    location.pathname = '/app.html';
   })
   .fail(function(error){
     alert(error.message);
