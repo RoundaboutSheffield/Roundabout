@@ -1,5 +1,3 @@
-const moment = require('moment');
-
 module.exports = (nga, admin) => {
   const message = nga.entity('messages');
 
@@ -8,7 +6,9 @@ module.exports = (nga, admin) => {
       nga.field('id'),
       nga.field('from'),
       nga.field('message'),
-      nga.field('timestamp')
+      nga.field('timestamp', 'datetime')
+        .label('Date')
+        .format('dd-MM-yyyy HH:mm:ss'),
     ]);
 
   message.creationView()
@@ -16,8 +16,14 @@ module.exports = (nga, admin) => {
       nga.field('from'),
       nga.field('to', 'reference_many')
         .targetEntity(nga.entity('contacts'))
-        .targetField(nga.field('fullName')),
+        .targetField(nga.field('fullName'))
+        .validation({
+          required: true,
+        }),
       nga.field('message', 'text')
+        .validation({
+          required: true,
+        }),
     ]);
 
   message.showView()
@@ -26,9 +32,16 @@ module.exports = (nga, admin) => {
       nga.field('to', 'reference_many')
         .targetEntity(nga.entity('contacts'))
         .targetField(nga.field('fullName'))
-        .singleApiCall(ids => ({'id': ids })),
-      nga.field('message', 'text')
+        .singleApiCall(ids => ({
+          id: { $in: ids },
+        })),
+      nga.field('timestamp', 'datetime')
+        .label('Date')
+        .format('dd-MM-yyyy HH:mm:ss'),
+      nga.field('message', 'text'),
     ]);
 
   admin.addEntity(message);
+
+  return message;
 };
