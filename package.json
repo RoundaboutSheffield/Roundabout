@@ -23,6 +23,8 @@
   "homepage": "https://github.com/RoundaboutSheffield/Roundabout#readme",
   "dependencies": {
     "deployd": "^0.8.9",
+    "dpd-event-extension": "0.0.3",
+    "dpd-jobs": "^0.14.0",
     "env2": "^2.1.1",
     "nexmo": "^1.0.0-beta-7"
   },
