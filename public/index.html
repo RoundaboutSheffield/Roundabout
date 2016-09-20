@@ -19,7 +19,9 @@
           <div class="form-group">
             <input type="password" name="password" class="form-control" placeholder="Password" required>
           </div>
-          <button class="login_button btn btn-md btn-block sign-in-btn" class="button" id="login" type="submit"><b>Sign in</b></button>
+          <button class="login_button btn btn-md btn-block sign-in-btn" id="login" type="submit"><b>Sign in</b></button>
+      <a href="/register.html" class="btn btn-link">sign up</a>
+          </form>
       </div>
     </div>
 
@@ -35,7 +37,7 @@ var loginUser = function(username, password) {
       password: password
     })
   .then(function(e){
-    location.pathname = '/index.html';
+    location.href = '/app.html';
   })
   .fail(function(error){
     alert(error.message);
