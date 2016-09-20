@@ -2,7 +2,7 @@ module.exports = (nga, admin) => {
   const contact = nga.entity('contacts');
 
   const fields = [
-    nga.field('name')
+    nga.field('firstName')
       .validation({
         required: true,
       }),
@@ -16,8 +16,9 @@ module.exports = (nga, admin) => {
   contact
     .listView()
     .fields([
-      nga.field('id'),
-      ...fields,
+      nga.field('fullName')
+        .isDetailLink(true),
+      nga.field('phoneNumber'),
     ])
     .filters(fields);
 

@@ -235,13 +235,13 @@
 	module.exports = (nga, admin) => {
 	  const contact = nga.entity('contacts');
 
-	  const fields = [nga.field('name').validation({
+	  const fields = [nga.field('firstName').validation({
 	    required: true
 	  }), nga.field('lastName'), nga.field('phoneNumber').validation({
 	    required: true
 	  })];
 
-	  contact.listView().fields([nga.field('id'), ...fields]).filters(fields);
+	  contact.listView().fields([nga.field('fullName').isDetailLink(true), nga.field('phoneNumber')]).filters(fields);
 
 	  contact.creationView().fields(fields);
 
@@ -261,13 +261,13 @@
 
 	  const fields = [nga.field('title'), nga.field('to', 'reference_many').targetEntity(nga.entity('contacts')).targetField(nga.field('fullName')).validation({
 	    required: true
-	  }), nga.field('date', 'datetime').validation({
+	  }), nga.field('date', 'datetime').format('dd-MM-yyyy HH:mm:ss').validation({
 	    required: true
 	  }), nga.field('message', 'text').validation({
 	    required: true
 	  })];
 
-	  appointment.listView().fields([nga.field('id'), ...fields]).filters(fields);
+	  appointment.listView().fields([nga.field('id'), nga.field('title'), nga.field('to', 'reference_many').targetEntity(nga.entity('contacts')).targetField(nga.field('fullName')), nga.field('date', 'datetime').format('dd-MM-yyyy HH:mm:ss'), nga.field('sent')]).filters(fields);
 
 	  appointment.creationView().fields(fields);
 
