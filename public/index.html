@@ -20,13 +20,20 @@
             <input type="password" name="password" class="form-control" placeholder="Password" required>
           </div>
           <button class="login_button btn btn-md btn-block sign-in-btn" id="login" type="submit"><b>Sign in</b></button>
-      <a href="/register.html" class="btn btn-link">sign up</a>
+      <a href="/register.html" class="btn btn-link">register new user</a>
           </form>
       </div>
     </div>
 
     <script type="text/javascript" src="dpd.js"></script>
     <script type="text/javascript" charset="utf-8">
+
+dpd.users.me(function(user) {
+  if (user) {
+    location.href = '/app.html';
+  }
+});
+
 var form = document.querySelector('form');
 var login = document.getElementById('login');
 var loginUser = function(username, password) {
@@ -36,7 +43,7 @@ var loginUser = function(username, password) {
       username: username,
       password: password
     })
-  .then(function(e){
+  .then(function(){
     location.href = '/app.html';
   })
   .fail(function(error){

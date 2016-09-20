@@ -20,19 +20,20 @@
             <input type="password" name="password" class="form-control" placeholder="Password" required>
           </div>
           <div class="form-group">
-            <input type="password" name="confirm-password" class="form-control" placeholder="Confirm password" required>
+            <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm password" required>
           </div>
-          <button class="login_button btn btn-md btn-block sign-in-btn button" id="login" type="submit"><b>Register</b></button>
+          <button class="login_button btn btn-md btn-block sign-in-btn button" id="register" type="submit"><b>Register</b></button>
         <a href="/" class="btn btn-link">home</a>
       </form>
       </div>
     </div>
     <script type="text/javascript" src="dpd.js"></script>
     <script type="text/javascript">
-$('form').submit(function() {
-  var username = $('#username').val();
-  var password = $('#password').val();
-  var confirmPassword = $('#confirm-password').val();
+
+var form = document.querySelector('form');
+var register = document.getElementById('register');
+
+var loginUser = function(username, password, confirmPassword) {
   if (!username) {
     alert("Username is required");
   } else if (!password) {
@@ -46,13 +47,21 @@ $('form').submit(function() {
         username: username,
         password: password
       })
-   .then(function(e) {
+   .then(function() {
       location.href = "/index.html";
     })  
    .fail(function(error){
      alert(error.message);
    });
   }
+};
+
+register.addEventListener('click', function(event) {
+  var username = form.username.value;
+  var password = form.password.value;
+  var confirmPassword = form.confirmpassword.value;
+  event.preventDefault();
+  loginUser(username, password, confirmPassword);
 });
     </script>
   </body>
