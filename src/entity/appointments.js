@@ -10,6 +10,7 @@ module.exports = (nga, admin) => {
         required: true,
       }),
     nga.field('date', 'datetime')
+      .format('dd-MM-yyyy HH:mm:ss')
       .validation({
         required: true,
       }),
@@ -23,7 +24,13 @@ module.exports = (nga, admin) => {
     .listView()
     .fields([
       nga.field('id'),
-      ...fields,
+      nga.field('title'),
+      nga.field('to', 'reference_many')
+        .targetEntity(nga.entity('contacts'))
+        .targetField(nga.field('fullName')),
+      nga.field('date', 'datetime')
+        .format('dd-MM-yyyy HH:mm:ss'),
+      nga.field('sent'),
     ])
     .filters(fields);
 
