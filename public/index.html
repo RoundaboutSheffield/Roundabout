@@ -1,12 +1,61 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body ng-app="myApp">
-  <div ui-view></div>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script type="text/javascript" src="dpd.js"></script>
-  <script type="text/javascript" src="js/bundle.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="login-background">
+      <div class="login-container col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 full-screen">
+        <form class="form-signin">
+          <div class="logo-container col-6">
+            <img class="logo" src="../assets/logo.png"/>
+          </div>
+          <div class="form-group">
+            <input type="text" id="userNameInput" name="username" class="form-control" placeholder="Username" required autofocus>
+          </div>
+          <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+          </div>
+          <button class="login_button btn btn-md btn-block sign-in-btn" id="login" type="submit"><b>Sign in</b></button>
+      <a href="/register.html" class="btn btn-link">register new user</a>
+          </form>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="dpd.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+dpd.users.me(function(user) {
+  if (user) {
+    location.href = '/app.html';
+  }
+});
+
+var form = document.querySelector('form');
+var login = document.getElementById('login');
+var loginUser = function(username, password) {
+  dpd
+    .users
+    .login({
+      username: username,
+      password: password
+    })
+  .then(function(e){
+    location.pathname = '/app.html';
+  })
+  .fail(function(error){
+    alert(error.message);
+  });
+}
+login.addEventListener('click', function(event) {
+  var username = form.username.value;
+  var password = form.password.value;
+  event.preventDefault();
+  loginUser(username, password);
+});
+    </script>
+  </body>
 </html>

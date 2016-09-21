@@ -1,12 +1,12 @@
 {
 	"type": "Collection",
 	"properties": {
-		"firstName": {
-			"name": "firstName",
+		"name": {
+			"name": "name",
 			"type": "string",
 			"typeLabel": "string",
 			"required": true,
-			"id": "firstName",
+			"id": "name",
 			"order": 0
 		},
 		"lastName": {
@@ -16,14 +16,6 @@
 			"required": false,
 			"id": "lastName",
 			"order": 1
-		},
-		"phoneNumber": {
-			"name": "phoneNumber",
-			"type": "string",
-			"typeLabel": "string",
-			"required": true,
-			"id": "phoneNumber",
-			"order": 2
 		}
 	}
 }

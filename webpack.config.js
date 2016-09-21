@@ -3,21 +3,19 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const sources = [
   './node_modules/ng-admin/build/ng-admin.min.css',
-  './node_modules/ng-admin/build/ng-admin.min.js',
-  './src/index.js'
+  './src/style/main.css',
+  './src/index.js',
 ];
 
 module.exports = {
-  entry: {
-    'bundle': sources
-  },
+  entry: sources,
   output: {
-    path: "public/js",
-    filename: "[name].js"
+    path: __dirname + '/public/js',
+    filename: '[name].js'
   },
   module: {
     loaders: [
-      { test: /\.js/, loader: 'babel' },
+      { test: /\.js/, exclude: /node_modules/, loader: 'babel' },
       { test: /\.html$/, loader: 'html' },
       { test: /\.css$/, loader: ExtractTextPlugin.extract('css') },
       { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') }

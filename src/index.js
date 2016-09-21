@@ -1,48 +1,26 @@
-  var myApp = angular.module('myApp', ['ng-admin']);
-  myApp.config(['NgAdminConfigurationProvider', function(NgAdminConfigurationProvider) {
-      var nga = NgAdminConfigurationProvider;
-      // create an admin application
-      var admin = nga.application('My First Admin');
+require('ng-admin');
+const messageEntity = require('./entity/messages');
+const contactEntity = require('./entity/contacts');
+const appointmentEntity = require('./entity/appointments');
+const headerTemplate = require('./header/header.js');
 
-      var message = nga.entity('messages');
+const app = angular.module('roundAbout', ['ng-admin'])
+  .config(['NgAdminConfigurationProvider', nga => {
+    const admin = nga.application('RoundAbout');
 
-      message.listView()
-        .fields([
-          nga.field('to'),
-          nga.field('message')
-        ]);
+    const message = messageEntity(nga, admin);
+    const contact = contactEntity(nga, admin);
+    const appointment = appointmentEntity(nga, admin);
 
-      message.creationView()
-        .fields([
-          nga.field('to', 'reference_many')
-            .targetEntity(nga.entity('contacts'))
-            .targetField(nga.field('fullName')),
-          nga.field('message', 'text')
-        ]);
+    const header = headerTemplate(nga, admin);
 
-      var contact = nga.entity('contacts');
+    nga.configure(admin);
 
-      contact.listView()
-        .fields([
-          nga.field('name'),
-          nga.field('lastName'),
-          nga.field('phoneNumber'),
-          nga.field('isKeyWorker')
-        ]);
-
-      contact.creationView()
-        .fields([
-          nga.field('name'),
-          nga.field('lastName'),
-          nga.field('phoneNumber'),
-          nga.field('isKeyWorker', 'boolean')
-        ]);
-
-
-      admin
-        .addEntity(message)
-        .addEntity(contact);
-
-      nga.configure(admin);
+    admin.menu(nga.menu()
+        .addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>'))
+        .addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>'))
+        .addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>'))
+    );
   }]);
 
+require('./config/serializeParams')(app);
