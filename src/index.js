@@ -2,7 +2,6 @@ require('ng-admin');
 const messageEntity = require('./entity/messages');
 const contactEntity = require('./entity/contacts');
 const appointmentEntity = require('./entity/appointments');
-
 const headerTemplate = require('./header/header.js');
 
 const app = angular.module('roundAbout', ['ng-admin'])
