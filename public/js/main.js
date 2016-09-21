@@ -69,6 +69,7 @@
 	const messageEntity = __webpack_require__(5);
 	const contactEntity = __webpack_require__(6);
 	const appointmentEntity = __webpack_require__(7);
+	const headerTemplate = __webpack_require__(8);
 
 	const app = angular.module('roundAbout', ['ng-admin']).config(['NgAdminConfigurationProvider', nga => {
 	  const admin = nga.application('RoundAbout');
@@ -77,12 +78,14 @@
 	  const contact = contactEntity(nga, admin);
 	  const appointment = appointmentEntity(nga, admin);
 
+	  const header = headerTemplate(nga, admin);
+
 	  nga.configure(admin);
 
 	  admin.menu(nga.menu().addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')));
 	}]);
 
-	__webpack_require__(8)(app);
+	__webpack_require__(9)(app);
 
 /***/ },
 /* 4 */
@@ -280,6 +283,36 @@
 
 /***/ },
 /* 8 */
+/***/ function(module, exports) {
+
+	module.exports = (nga, admin) => {
+	  const headerTemplate = `<div class="navbar-header">
+	  <a class="navbar-brand" href="#" ng-click="appController.displayHome()">
+	    RoundAbout
+	  </a>
+	</div>
+	<p class="navbar-text navbar-right" id="logout">
+	    <span class="glyphicon glyphicon-user"></span>&nbsp;Logout
+	</p>
+	<script type="text/javascript" src="dpd.js"></script>    
+	<script type="text/javascript">    
+
+	logout = document.getElementById('logout');
+	logout.addEventListener('click', function(event) {
+	  dpd.users.logout(function(result, error) {
+	    if (error) alert(error.message);
+	    else location.pathname = '/index.html';
+	  });
+	})
+
+	</script>
+	    `;
+
+	  admin.header(headerTemplate);
+	};
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = app => app.factory('serializeParams', [() => {

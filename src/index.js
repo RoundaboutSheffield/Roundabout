@@ -2,6 +2,7 @@ require('ng-admin');
 const messageEntity = require('./entity/messages');
 const contactEntity = require('./entity/contacts');
 const appointmentEntity = require('./entity/appointments');
+const headerTemplate = require('./header/header.js');
 
 const app = angular.module('roundAbout', ['ng-admin'])
   .config(['NgAdminConfigurationProvider', nga => {
@@ -10,6 +11,8 @@ const app = angular.module('roundAbout', ['ng-admin'])
     const message = messageEntity(nga, admin);
     const contact = contactEntity(nga, admin);
     const appointment = appointmentEntity(nga, admin);
+
+    const header = headerTemplate(nga, admin);
 
     nga.configure(admin);
 
