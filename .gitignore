@@ -1,5 +1,6 @@
 config.env
 .dpd
+.sass-cache
 node_modules
 data
 **/*.DS_Store

@@ -1,1 +1,1 @@
-this.fullName = `${this.name} ${this.lastName}`;
+this.fullName = `${this.firstName} ${this.lastName}`;

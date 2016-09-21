@@ -1,0 +1,37 @@
+@import 'variables';
+
+// login.html
+
+body {
+  background-color: #F6F6F6;
+}
+
+.login-container {
+  background-color: #FFFFFF;
+  padding: 1em;
+  margin-top: 3em;
+  border-radius: 10px;
+  border-top-color: #00B6DE;
+}
+
+.form-group {
+  font-family: Helvetica;
+}
+
+.login_button {
+  background-color: #00B6DE;
+  font-family: Helvetica;
+}
+
+.login_button:hover {
+  background-color: #91C849;
+}
+
+.login_button:focus {
+    outline:none !important;
+}
+
+.logo-container {
+  padding: 2.5em;
+  position: center;
+}
