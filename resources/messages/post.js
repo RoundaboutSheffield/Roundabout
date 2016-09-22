@@ -4,6 +4,11 @@ const apiKey = process().env.NEXMO_KEY;
 const apiSecret = process().env.NEXMO_SECRET;
 const debug = process().env.DEBUG;
 
+if (!apiKey || !apiSecret){
+    emit('apiError')
+    cancel('Missing API key')
+}
+
 const nexmo = new Nexmo({ apiKey, apiSecret }, { debug });
 const { from, to, message } = this;
 
