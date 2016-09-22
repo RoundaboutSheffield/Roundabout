@@ -43,5 +43,9 @@ module.exports = (nga, admin) => {
 
   admin.addEntity(message);
 
+  dpd.on('apiError', function() {
+    alert('Error: Nexmo key missing. See project readme for correct way to execute application')
+  });
+
   return message;
 };
