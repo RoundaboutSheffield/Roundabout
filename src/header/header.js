@@ -5,7 +5,7 @@ module.exports = (nga, admin) => {
     RoundAbout
   </a>
 </div>
-<p class="navbar-text navbar-right" id="logout">
+<p class="navbar-text navbar-right" id="logout" ng-click>
     <span class="glyphicon glyphicon-user"></span>&nbsp;Logout
 </p>
 <script type="text/javascript" src="dpd.js"></script>    
