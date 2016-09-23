@@ -48,6 +48,14 @@
 			"required": false,
 			"id": "sent",
 			"order": 5
+		},
+		"userId": {
+			"name": "userId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "userId",
+			"order": 6
 		}
 	}
 }
