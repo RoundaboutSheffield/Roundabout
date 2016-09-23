@@ -16,6 +16,14 @@
 			"required": false,
 			"id": "lastName",
 			"order": 1
+		},
+		"userId": {
+			"name": "userId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "userId",
+			"order": 2
 		}
 	}
 }

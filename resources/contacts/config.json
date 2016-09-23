@@ -24,6 +24,14 @@
 			"required": true,
 			"id": "phoneNumber",
 			"order": 2
+		},
+		"userId": {
+			"name": "userId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "userId",
+			"order": 3
 		}
 	}
 }
