@@ -24,3 +24,6 @@ const app = angular.module('roundAbout', ['ng-admin'])
   }]);
 
 require('./config/serializeParams')(app);
+require('./directives/logoutBtn')(app);
+
+
