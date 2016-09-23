@@ -20,3 +20,5 @@ dpd.contacts.get({id: {$in:to} })
     phoneNumbers.forEach(phone =>
       nexmo.message.sendSms(from, phone, message));
   });
+
+this.userId = me.id;
