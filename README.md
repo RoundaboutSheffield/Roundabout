@@ -1,5 +1,6 @@
 # Roundabout Texting System
 
+The aim for the 4 day sprint was to complete an MVP that would send text messages from a particular user. This would be used by keyworkers to engage with a young person. During the 4 day sprint, we were able to complete this task, and created a system using the API **Nexmo** that sent text messages. 
 
 ## For our Project Owners:
 GitHub Reference Guide - courtesy of DWYL
