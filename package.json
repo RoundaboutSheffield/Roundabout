@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "GitHub Reference Guide - courtesy of DWYL",
   "main": "index.js",
+  "engines": {
+    "node": "6.X"
+  },
   "scripts": {
     "start": "node index.js",
     "dev": "dpd",
