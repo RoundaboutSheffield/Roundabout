@@ -21,4 +21,4 @@ dpd.contacts.get({id: {$in:to} })
       nexmo.message.sendSms(from, phone, message));
   });
 
-this.userId = me.id;
+this.userId = me && me.id || this.userId;
