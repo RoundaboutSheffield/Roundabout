@@ -8,15 +8,14 @@
 </head>
 <body ng-app="roundAbout">
   <div id="content" style="display: none">
-    <div ui-view></div>
+    <div>tenant dashboard...</div>
   </div>
   <script type="text/javascript" src="dpd.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="assets/auth.js"></script>
   <script type="text/javascript" charset="utf-8">
 
   getUser()
-  .then(redirectIfNotAdminUser)
+  .then(redirectIfNotTenantUser)
   .then(function() {
     setTimeout(function() {
       document.querySelector('#content').style.display = 'inherit';
