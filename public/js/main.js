@@ -65,12 +65,14 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(4);
+	// eslint-disable-next-line import/no-extraneous-dependencies
+	__webpack_require__(4); // NOTE: ng-admin needs to be a dev dependency
+
 	const messageEntity = __webpack_require__(5);
 	const contactEntity = __webpack_require__(6);
 	const appointmentEntity = __webpack_require__(7);
 	const tasksEntity = __webpack_require__(8);
-	const headerTemplate = __webpack_require__(9);
+	// const headerTemplate = require('./header/header.js');
 
 	const app = angular.module('roundAbout', ['ng-admin']).config(['NgAdminConfigurationProvider', nga => {
 	  const admin = nga.application('RoundAbout');
@@ -80,15 +82,15 @@
 	  const appointment = appointmentEntity(nga, admin);
 	  const tasks = tasksEntity(nga, admin);
 
-	  const header = headerTemplate(nga, admin);
+	  // const header = headerTemplate(nga, admin);     // NOTE: not used - delete?
 
 	  nga.configure(admin);
 
 	  admin.menu(nga.menu().addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')).addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>')));
 	}]);
 
+	__webpack_require__(9)(app);
 	__webpack_require__(10)(app);
-	__webpack_require__(11)(app);
 
 /***/ },
 /* 4 */
@@ -223,8 +225,9 @@
 
 	  admin.addEntity(message);
 
-	  dpd.on('apiError', function () {
-	    alert('Error: Nexmo key missing. See project readme for correct way to execute application');
+	  dpd.on('apiError', () => {
+	    // eslint-disable-next-line no-alert
+	    window.alert('Error: Nexmo key missing. See project readme for correct way to execute application');
 	  });
 
 	  return message;
@@ -285,43 +288,26 @@
 /***/ function(module, exports) {
 
 	module.exports = (nga, admin) => {
-	    const task = nga.entity('tasks');
+	  const task = nga.entity('tasks');
 
-	    task.listView().fields([nga.field('taskName'), nga.field('details'), nga.field('inCollege'), nga.field('points')]);
+	  task.listView().fields([nga.field('taskName'), nga.field('details'), nga.field('inCollege'), nga.field('points')]);
 
-	    task.creationView().fields([nga.field('taskName').validation({ required: true }), nga.field('points').validation({ required: true }), nga.field('inCollege', 'boolean'), nga.field('details', 'text').validation({ required: true })]);
+	  task.creationView().fields([nga.field('taskName').validation({ required: true }), nga.field('points').validation({ required: true }), nga.field('inCollege', 'boolean'), nga.field('details', 'text').validation({ required: true })]);
 
-	    task.showView().fields([nga.field('taskName').validation({ required: true }), nga.field('points').validation({ required: true }), nga.field('inCollege', 'boolean'), nga.field('details', 'text').validation({ required: true })]);
+	  task.showView().fields([nga.field('taskName').validation({ required: true }), nga.field('points').validation({ required: true }), nga.field('inCollege', 'boolean'), nga.field('details', 'text').validation({ required: true })]);
 
-	    admin.addEntity(task);
+	  admin.addEntity(task);
 
-	    dpd.on('apiError', function () {
-	        alert('Error: Nexmo key missing. See project readme for correct way to execute application');
-	    });
+	  dpd.on('apiError', () => {
+	    // eslint-disable-next-line no-alert
+	    alert('Error: Nexmo key missing. See project readme for correct way to execute application');
+	  });
 
-	    return task;
+	  return task;
 	};
 
 /***/ },
 /* 9 */
-/***/ function(module, exports) {
-
-	module.exports = (nga, admin) => {
-	  const headerTemplate = `<div class="navbar-header">
-	  <a class="navbar-brand" href="#" ng-click="appController.displayHome()">
-	    RoundAbout
-	  </a>
-	</div>
-	<p class="navbar-text navbar-right" id="logout" ng-click>
-	  <logout />
-	</p>
-	   `;
-
-	  admin.header(headerTemplate);
-	};
-
-/***/ },
-/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = app => app.factory('serializeParams', [() => {
@@ -377,7 +363,7 @@
 	}]);
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = app => app.directive('logout', ['$http', $http => {

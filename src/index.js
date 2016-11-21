@@ -1,4 +1,5 @@
-require('ng-admin');
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('ng-admin');  // NOTE: ng-admin needs to be a dev dependency
 
 const messageEntity = require('./entity/messages');
 const contactEntity = require('./entity/contacts');
