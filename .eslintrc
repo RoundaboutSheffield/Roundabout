@@ -1,7 +1,12 @@
 {
   "extends": "airbnb",
+  "env": {
+    "node": true,
+    "browser": true
+  },
   "globals": {
-    "angular": true
+    "angular": true,
+    "dpd": true
   },
   "rules": {
     "no-underscore-dangle": 0,

@@ -1,6 +1,7 @@
 require('env2')('./config.env');
 
 const deployd = require('deployd');
+
 const options = {
   port: process.env.PORT || 8080,
   db: {

@@ -1,0 +1,37 @@
+{
+	"type": "Collection",
+	"properties": {
+		"taskName": {
+			"name": "taskName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "taskName",
+			"order": 0
+		},
+		"details": {
+			"name": "details",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "details",
+			"order": 1
+		},
+		"inCollege": {
+			"name": "inCollege",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": true,
+			"id": "inCollege",
+			"order": 2
+		},
+		"points": {
+			"name": "points",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "points",
+			"order": 3
+		}
+	}
+}

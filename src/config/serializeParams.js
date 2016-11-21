@@ -1,6 +1,6 @@
 module.exports = app => app
   .factory('serializeParams', [() => {
-    const request = config => {
+    const request = (config) => {
       const paramSerializer = param => param;
       const params = JSON.stringify(config.params) || '';
       return Object.assign({}, config, { paramSerializer, params });
@@ -11,7 +11,7 @@ module.exports = app => app
   .config(['$httpProvider', $httpProvider =>
     $httpProvider.interceptors.push('serializeParams'),
   ])
-  .config(['RestangularProvider', RestangularProvider => {
+  .config(['RestangularProvider', (RestangularProvider) => {
     RestangularProvider.addFullRequestInterceptor(
       (element, operation, what, url, headers, params) => {
         if (operation === 'getList') {

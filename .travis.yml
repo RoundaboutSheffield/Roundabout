@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- '6'
+notifications:
+  email: false
+cache:
+  directories:
+  - node_modules
+before_script: npm prune
+script:
+- npm run precommit
