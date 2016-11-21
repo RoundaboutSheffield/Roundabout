@@ -72,7 +72,7 @@
 	const contactEntity = __webpack_require__(6);
 	const appointmentEntity = __webpack_require__(7);
 	const tasksEntity = __webpack_require__(8);
-	// const headerTemplate = require('./header/header.js');
+	const headerTemplate = __webpack_require__(11);
 
 	const app = angular.module('roundAbout', ['ng-admin']).config(['NgAdminConfigurationProvider', nga => {
 	  const admin = nga.application('RoundAbout');
@@ -82,7 +82,7 @@
 	  const appointment = appointmentEntity(nga, admin);
 	  const tasks = tasksEntity(nga, admin);
 
-	  // const header = headerTemplate(nga, admin);     // NOTE: not used - delete?
+	  headerTemplate(nga, admin);
 
 	  nga.configure(admin);
 
@@ -381,6 +381,24 @@
 
 	  return directive;
 	}]);
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = (nga, admin) => {
+	  const headerTemplate = `<div class="navbar-header">
+	      <a class="navbar-brand" href="#" ng-click="appController.displayHome()">
+	        RoundAbout
+	      </a>
+	    </div>
+	    <p class="navbar-text navbar-right" id="logout" ng-click>
+	      <logout />
+	    </p>
+	       `;
+
+	  admin.header(headerTemplate);
+	};
 
 /***/ }
 /******/ ]);
