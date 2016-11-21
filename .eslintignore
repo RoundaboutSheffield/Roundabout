@@ -1,0 +1,7 @@
+node_modules/*
+coverage/*
+decls/*
+public/js/main.js
+.*
+webpack.config.js
+resources/*

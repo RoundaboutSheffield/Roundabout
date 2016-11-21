@@ -4,12 +4,13 @@
   "description": "GitHub Reference Guide - courtesy of DWYL",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "dpd",
     "build": "webpack",
-    "webpack-watch": "webpack --watch",
+    "dev": "dpd",
+    "lint": "eslint './**/*.js'",
+    "precommit": "npm run lint",
+    "start": "node index.js",
     "watch": "npm-run-all --parallel dev webpack-watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "webpack-watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,8 @@
     "dpd-event-extension": "0.0.3",
     "dpd-jobs": "^0.14.0",
     "env2": "^2.1.1",
-    "nexmo": "^1.0.0-beta-7"
+    "nexmo": "^1.0.0-beta-7",
+    "ng-admin": "0.9.0"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -37,11 +39,16 @@
     "browser-sync": "^2.14.3",
     "browser-sync-webpack-plugin": "^1.1.2",
     "css-loader": "^0.24.0",
+    "eslint": "^3.10.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.7.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-loader": "^0.4.4",
+    "husky": "^0.11.9",
     "jquery": "^3.1.0",
     "moment": "^2.14.1",
-    "ng-admin": "0.9.0",
     "npm-run-all": "^3.0.0",
     "webpack": "^1.13.2"
   }
