@@ -8,9 +8,6 @@ module.exports = app => app
 
     return { request };
   }])
-  .config(['$httpProvider', $httpProvider =>
-    $httpProvider.interceptors.push('serializeParams'),
-  ])
   .config(['RestangularProvider', (RestangularProvider) => {
     RestangularProvider.addFullRequestInterceptor(
       (element, operation, what, url, headers, params) => {
@@ -54,4 +51,24 @@ module.exports = app => app
 
         return { params };
       });
-  }]);
+  }])
+  .config(['RestangularProvider', RestangularProvider =>
+    RestangularProvider.addFullRequestInterceptor(
+      (element, operation, what, url, headers, params) => {
+        if (what !== 'users') return;
+
+        switch (operation) {
+          case 'put':
+          case 'post':
+            element.isAdmin = true;
+            return;
+          case 'getList':
+            params.isAdmin = true;
+            break;
+          default:
+        }
+      }),
+  ]);
+    // .config(['$httpProvider', $httpProvider =>
+    //   $httpProvider.interceptors.push('serializeParams'),
+    // ]);
