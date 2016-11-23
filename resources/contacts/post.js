@@ -1,1 +1,3 @@
-this.userId = me.id;
+console.log('--->', this);
+
+// this.userId = me.id;
