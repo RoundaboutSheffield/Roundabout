@@ -1,4 +1,5 @@
-module.exports = app => app
+module.exports = app =>
+  app
   .config(['RestangularProvider', (RestangularProvider) => {
     RestangularProvider.addFullRequestInterceptor(
       (element, operation, what, url, headers, params) => {

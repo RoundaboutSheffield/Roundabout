@@ -32,5 +32,5 @@ const app = angular.module('roundAbout', ['ng-admin'])
       .addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>')));
   }]);
 
-require('./config/serializeParams')(app);
+require('./config/restangularConfig')(app);
 require('./directives/logoutBtn')(app);

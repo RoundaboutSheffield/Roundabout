@@ -91,7 +91,7 @@
 	  admin.menu(nga.menu().addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')).addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>')));
 	}]);
 
-	__webpack_require__(11)(app);
+	__webpack_require__(13)(app);
 	__webpack_require__(12)(app);
 
 /***/ },
@@ -349,7 +349,28 @@
 	};
 
 /***/ },
-/* 11 */
+/* 11 */,
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = app => app.directive('logout', ['$http', $http => {
+	  const directive = {
+	    restrict: 'E',
+	    template: '<div><span class="glyphicon glyphicon-user"></span>&nbsp;Logout</div>',
+	    link(scope, element) {
+	      element.on('click', () => {
+	        $http.post('/users/logout').then(() => {
+	          window.location.href = '/';
+	        });
+	      });
+	    }
+	  };
+
+	  return directive;
+	}]);
+
+/***/ },
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports = app => app.config(['RestangularProvider', RestangularProvider => {
@@ -395,26 +416,6 @@
 	    }
 	    return { params };
 	  });
-	}]);
-
-/***/ },
-/* 12 */
-/***/ function(module, exports) {
-
-	module.exports = app => app.directive('logout', ['$http', $http => {
-	  const directive = {
-	    restrict: 'E',
-	    template: '<div><span class="glyphicon glyphicon-user"></span>&nbsp;Logout</div>',
-	    link(scope, element) {
-	      element.on('click', () => {
-	        $http.post('/users/logout').then(() => {
-	          window.location.href = '/';
-	        });
-	      });
-	    }
-	  };
-
-	  return directive;
 	}]);
 
 /***/ }
