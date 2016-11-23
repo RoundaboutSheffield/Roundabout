@@ -215,7 +215,7 @@
 
 	  const fields = [nga.field('username').validation({
 	    required: true
-	  }), nga.field('password')];
+	  }), nga.field('password'), nga.field('isAdmin', 'boolean').choices([{ value: true, label: 'true' }, { value: false, label: 'false' }])];
 
 	  user.listView().fields([nga.field('username').isDetailLink(true)]).filters(fields);
 
@@ -268,7 +268,7 @@
 	    required: true
 	  }), nga.field('lastName'), nga.field('phoneNumber').validation({
 	    required: true
-	  })];
+	  }), nga.field('userId', 'reference').targetEntity(nga.entity('users')).targetField(nga.field('username'))];
 
 	  contact.listView().fields([nga.field('fullName').isDetailLink(true), nga.field('phoneNumber')]).filters(fields);
 
@@ -352,15 +352,7 @@
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = app => app.factory('serializeParams', [() => {
-	  const request = config => {
-	    const paramSerializer = param => param;
-	    const params = JSON.stringify(config.params) || '';
-	    return Object.assign({}, config, { paramSerializer, params });
-	  };
-
-	  return { request };
-	}]).config(['RestangularProvider', RestangularProvider => {
+	module.exports = app => app.config(['RestangularProvider', RestangularProvider => {
 	  RestangularProvider.addFullRequestInterceptor((element, operation, what, url, headers, params) => {
 	    if (operation === 'getList') {
 	      const dir = params._sortDir === 'DESC' ? -1 : 1;
@@ -382,11 +374,13 @@
 
 	    if (operation === 'getList' && params._filters) {
 	      Object.keys(params._filters).reduce((acc, filter) => {
-	        if (filter === 'id') {
+	        // NOTE: this is a custom solution - perhaps refactor?
+	        if (filter === 'id' || filter === 'isAdmin') {
 	          const idFilter = params._filters[filter];
 	          return Object.assign(acc, { [filter]: idFilter });
 	        }
 
+	        // NOTE: Where is this code used? It's overriding all options (e.g. isAdmin = true)
 	        const regexFilter = {
 	          $regex: params._filters[filter],
 	          $options: 'i'
@@ -399,26 +393,9 @@
 
 	      delete params._filters;
 	    }
-
 	    return { params };
 	  });
-	}]).config(['RestangularProvider', RestangularProvider => RestangularProvider.addFullRequestInterceptor((element, operation, what, url, headers, params) => {
-	  if (what !== 'users') return;
-
-	  switch (operation) {
-	    case 'put':
-	    case 'post':
-	      element.isAdmin = true;
-	      return;
-	    case 'getList':
-	      params.isAdmin = true;
-	      break;
-	    default:
-	  }
-	})]);
-	// .config(['$httpProvider', $httpProvider =>
-	//   $httpProvider.interceptors.push('serializeParams'),
-	// ]);
+	}]);
 
 /***/ },
 /* 12 */

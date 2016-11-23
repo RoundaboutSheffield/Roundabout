@@ -11,6 +11,9 @@ module.exports = (nga, admin) => {
       .validation({
         required: true,
       }),
+    nga.field('userId', 'reference')
+      .targetEntity(nga.entity('users'))
+      .targetField(nga.field('username')),
   ];
 
   contact

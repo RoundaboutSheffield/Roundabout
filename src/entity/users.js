@@ -7,6 +7,11 @@ module.exports = (nga, admin) => {
       required: true,
     }),
     nga.field('password'),
+    nga.field('isAdmin', 'boolean')
+      .choices([
+          { value: true, label: 'true' },
+          { value: false, label: 'false' },
+      ]),
   ];
 
   user
