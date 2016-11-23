@@ -72,7 +72,7 @@
 	const contactEntity = __webpack_require__(6);
 	const appointmentEntity = __webpack_require__(7);
 	const tasksEntity = __webpack_require__(8);
-	const headerTemplate = __webpack_require__(11);
+	const headerTemplate = __webpack_require__(9);
 
 	const app = angular.module('roundAbout', ['ng-admin']).config(['NgAdminConfigurationProvider', nga => {
 	  const admin = nga.application('RoundAbout');
@@ -83,14 +83,12 @@
 	  const tasks = tasksEntity(nga, admin);
 
 	  headerTemplate(nga, admin);
-
 	  nga.configure(admin);
-
 	  admin.menu(nga.menu().addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')).addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>')));
 	}]);
 
-	__webpack_require__(9)(app);
 	__webpack_require__(10)(app);
+	__webpack_require__(11)(app);
 
 /***/ },
 /* 4 */
@@ -208,14 +206,14 @@
 /* 5 */
 /***/ function(module, exports) {
 
-	module.exports = (nga, admin) => {
+	module.exports = (nga, admin, tasks) => {
 	  const message = nga.entity('messages');
 
 	  message.listView().fields([nga.field('id'), nga.field('from'), nga.field('message'), nga.field('timestamp', 'datetime').label('Date').format('dd-MM-yyyy HH:mm:ss')]);
 
 	  message.creationView().fields([nga.field('from'), nga.field('to', 'reference_many').targetEntity(nga.entity('contacts')).targetField(nga.field('fullName')).validation({
 	    required: true
-	  }), nga.field('message', 'text').validation({
+	  }), nga.field('task', 'reference_many').targetEntity(nga.entity('tasks')).targetField(nga.field('taskName')), nga.field('message', 'text').validation({
 	    required: true
 	  })]);
 
@@ -310,6 +308,24 @@
 /* 9 */
 /***/ function(module, exports) {
 
+	module.exports = (nga, admin) => {
+	  const headerTemplate = `<div class="navbar-header">
+	      <a class="navbar-brand" href="#" ng-click="appController.displayHome()">
+	        RoundAbout
+	      </a>
+	    </div>
+	    <p class="navbar-text navbar-right" id="logout" ng-click>
+	      <logout />
+	    </p>
+	       `;
+
+	  admin.header(headerTemplate);
+	};
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
 	module.exports = app => app.factory('serializeParams', [() => {
 	  const request = config => {
 	    const paramSerializer = param => param;
@@ -363,7 +379,7 @@
 	}]);
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	module.exports = app => app.directive('logout', ['$http', $http => {
@@ -381,24 +397,6 @@
 
 	  return directive;
 	}]);
-
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
-
-	module.exports = (nga, admin) => {
-	  const headerTemplate = `<div class="navbar-header">
-	      <a class="navbar-brand" href="#" ng-click="appController.displayHome()">
-	        RoundAbout
-	      </a>
-	    </div>
-	    <p class="navbar-text navbar-right" id="logout" ng-click>
-	      <logout />
-	    </p>
-	       `;
-
-	  admin.header(headerTemplate);
-	};
 
 /***/ }
 /******/ ]);
