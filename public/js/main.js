@@ -68,15 +68,17 @@
 	// eslint-disable-next-line import/no-extraneous-dependencies
 	__webpack_require__(4); // NOTE: ng-admin needs to be a dev dependency
 
-	const messageEntity = __webpack_require__(5);
-	const contactEntity = __webpack_require__(6);
-	const appointmentEntity = __webpack_require__(7);
-	const tasksEntity = __webpack_require__(8);
-	const headerTemplate = __webpack_require__(11);
+	const userEntity = __webpack_require__(5);
+	const messageEntity = __webpack_require__(6);
+	const contactEntity = __webpack_require__(7);
+	const appointmentEntity = __webpack_require__(8);
+	const tasksEntity = __webpack_require__(9);
+	const headerTemplate = __webpack_require__(10);
 
 	const app = angular.module('roundAbout', ['ng-admin']).config(['NgAdminConfigurationProvider', nga => {
 	  const admin = nga.application('RoundAbout');
 
+	  const user = userEntity(nga, admin);
 	  const message = messageEntity(nga, admin);
 	  const contact = contactEntity(nga, admin);
 	  const appointment = appointmentEntity(nga, admin);
@@ -86,11 +88,11 @@
 
 	  nga.configure(admin);
 
-	  admin.menu(nga.menu().addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')).addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>')));
+	  admin.menu(nga.menu().addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')).addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>')));
 	}]);
 
-	__webpack_require__(9)(app);
-	__webpack_require__(10)(app);
+	__webpack_require__(13)(app);
+	__webpack_require__(12)(app);
 
 /***/ },
 /* 4 */
@@ -209,6 +211,28 @@
 /***/ function(module, exports) {
 
 	module.exports = (nga, admin) => {
+	  const user = nga.entity('users');
+
+	  const fields = [nga.field('username').validation({
+	    required: true
+	  }), nga.field('password'), nga.field('isAdmin', 'boolean').choices([{ value: true, label: 'true' }, { value: false, label: 'false' }])];
+
+	  user.listView().fields([nga.field('username').isDetailLink(true)]).filters(fields);
+
+	  user.creationView().fields(fields);
+
+	  user.editionView().fields(fields);
+
+	  admin.addEntity(user);
+
+	  return user;
+	};
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = (nga, admin) => {
 	  const message = nga.entity('messages');
 
 	  message.listView().fields([nga.field('id'), nga.field('from'), nga.field('message'), nga.field('timestamp', 'datetime').label('Date').format('dd-MM-yyyy HH:mm:ss')]);
@@ -234,7 +258,7 @@
 	};
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = (nga, admin) => {
@@ -244,7 +268,7 @@
 	    required: true
 	  }), nga.field('lastName'), nga.field('phoneNumber').validation({
 	    required: true
-	  })];
+	  }), nga.field('userId', 'reference').targetEntity(nga.entity('users')).targetField(nga.field('username'))];
 
 	  contact.listView().fields([nga.field('fullName').isDetailLink(true), nga.field('phoneNumber')]).filters(fields);
 
@@ -258,7 +282,7 @@
 	};
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = (nga, admin) => {
@@ -284,7 +308,7 @@
 	};
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = (nga, admin) => {
@@ -307,18 +331,49 @@
 	};
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
-	module.exports = app => app.factory('serializeParams', [() => {
-	  const request = config => {
-	    const paramSerializer = param => param;
-	    const params = JSON.stringify(config.params) || '';
-	    return Object.assign({}, config, { paramSerializer, params });
+	module.exports = (nga, admin) => {
+	  const headerTemplate = `<div class="navbar-header">
+	      <a class="navbar-brand" href="#" ng-click="appController.displayHome()">
+	        RoundAbout
+	      </a>
+	    </div>
+	    <p class="navbar-text navbar-right" id="logout" ng-click>
+	      <logout />
+	    </p>
+	       `;
+
+	  admin.header(headerTemplate);
+	};
+
+/***/ },
+/* 11 */,
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = app => app.directive('logout', ['$http', $http => {
+	  const directive = {
+	    restrict: 'E',
+	    template: '<div><span class="glyphicon glyphicon-user"></span>&nbsp;Logout</div>',
+	    link(scope, element) {
+	      element.on('click', () => {
+	        $http.post('/users/logout').then(() => {
+	          window.location.href = '/';
+	        });
+	      });
+	    }
 	  };
 
-	  return { request };
-	}]).config(['$httpProvider', $httpProvider => $httpProvider.interceptors.push('serializeParams')]).config(['RestangularProvider', RestangularProvider => {
+	  return directive;
+	}]);
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = app => app.config(['RestangularProvider', RestangularProvider => {
 	  RestangularProvider.addFullRequestInterceptor((element, operation, what, url, headers, params) => {
 	    if (operation === 'getList') {
 	      const dir = params._sortDir === 'DESC' ? -1 : 1;
@@ -340,11 +395,13 @@
 
 	    if (operation === 'getList' && params._filters) {
 	      Object.keys(params._filters).reduce((acc, filter) => {
-	        if (filter === 'id') {
+	        // NOTE: this is a custom solution - perhaps refactor?
+	        if (filter === 'id' || filter === 'isAdmin') {
 	          const idFilter = params._filters[filter];
 	          return Object.assign(acc, { [filter]: idFilter });
 	        }
 
+	        // NOTE: Where is this code used? It's overriding all options (e.g. isAdmin = true)
 	        const regexFilter = {
 	          $regex: params._filters[filter],
 	          $options: 'i'
@@ -357,48 +414,9 @@
 
 	      delete params._filters;
 	    }
-
 	    return { params };
 	  });
 	}]);
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	module.exports = app => app.directive('logout', ['$http', $http => {
-	  const directive = {
-	    restrict: 'E',
-	    template: '<div><span class="glyphicon glyphicon-user"></span>&nbsp;Logout</div>',
-	    link(scope, element) {
-	      element.on('click', () => {
-	        $http.post('/users/logout').then(() => {
-	          window.location.href = '/';
-	        });
-	      });
-	    }
-	  };
-
-	  return directive;
-	}]);
-
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
-
-	module.exports = (nga, admin) => {
-	  const headerTemplate = `<div class="navbar-header">
-	      <a class="navbar-brand" href="#" ng-click="appController.displayHome()">
-	        RoundAbout
-	      </a>
-	    </div>
-	    <p class="navbar-text navbar-right" id="logout" ng-click>
-	      <logout />
-	    </p>
-	       `;
-
-	  admin.header(headerTemplate);
-	};
 
 /***/ }
 /******/ ]);

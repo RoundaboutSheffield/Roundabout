@@ -1,1 +1,0 @@
-this.userId = me.id;
