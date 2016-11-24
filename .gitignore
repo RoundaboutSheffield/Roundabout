@@ -4,4 +4,4 @@ config.env
 node_modules
 data
 **/*.DS_Store
-
+npm-debug.log

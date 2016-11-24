@@ -1,16 +1,5 @@
-module.exports = app => app
-  .factory('serializeParams', [() => {
-    const request = (config) => {
-      const paramSerializer = param => param;
-      const params = JSON.stringify(config.params) || '';
-      return Object.assign({}, config, { paramSerializer, params });
-    };
-
-    return { request };
-  }])
-  .config(['$httpProvider', $httpProvider =>
-    $httpProvider.interceptors.push('serializeParams'),
-  ])
+module.exports = app =>
+  app
   .config(['RestangularProvider', (RestangularProvider) => {
     RestangularProvider.addFullRequestInterceptor(
       (element, operation, what, url, headers, params) => {
@@ -34,11 +23,13 @@ module.exports = app => app
 
         if (operation === 'getList' && params._filters) {
           Object.keys(params._filters).reduce((acc, filter) => {
-            if (filter === 'id') {
+            // NOTE: this is a custom solution - perhaps refactor?
+            if (filter === 'id' || filter === 'isAdmin') {
               const idFilter = params._filters[filter];
               return Object.assign(acc, { [filter]: idFilter });
             }
 
+            // NOTE: Where is this code used? It's overriding all options (e.g. isAdmin = true)
             const regexFilter = {
               $regex: params._filters[filter],
               $options: 'i',
@@ -51,7 +42,6 @@ module.exports = app => app
 
           delete params._filters;
         }
-
         return { params };
       });
   }]);
