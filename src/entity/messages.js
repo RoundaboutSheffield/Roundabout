@@ -22,7 +22,6 @@ module.exports = (nga, admin, tasks) => {
             required: true,
           }),
 
-
             nga.field('task', 'reference_many')
               .targetEntity(nga.entity('tasks'))
               .targetField(nga.field('taskName')), 
