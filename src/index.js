@@ -8,6 +8,7 @@ const appointmentEntity = require('./entity/appointments');
 const tasksEntity = require('./entity/tasks');
 const headerTemplate = require('./header/header.js');
 
+
 const app = angular.module('roundAbout', ['ng-admin'])
   .config(['NgAdminConfigurationProvider', (nga) => {
     const admin = nga.application('RoundAbout');
@@ -18,10 +19,9 @@ const app = angular.module('roundAbout', ['ng-admin'])
     const appointment = appointmentEntity(nga, admin);
     const tasks = tasksEntity(nga, admin);
 
+
     headerTemplate(nga, admin);
-
     nga.configure(admin);
-
     admin.menu(
       nga
       .menu()
@@ -34,3 +34,4 @@ const app = angular.module('roundAbout', ['ng-admin'])
 
 require('./config/restangularConfig')(app);
 require('./directives/logoutBtn')(app);
+
