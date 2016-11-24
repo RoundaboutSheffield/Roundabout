@@ -10,7 +10,9 @@ if (!apiKey || !apiSecret){
 }
 
 const nexmo = new Nexmo({ apiKey, apiSecret }, { debug });
-const { from, to, message } = this;
+const { from, to, message, task } = this; //make sure you get task
+console.log(this)
+
 
 this.timestamp = Date.now();
 
@@ -19,6 +21,8 @@ dpd.contacts.get({id: {$in:to} })
   .then(phoneNumbers => {
     phoneNumbers.forEach(phone =>
       nexmo.message.sendSms(from, phone, message));
-  });
+  })
+  .then(()=>console.log()) //here update the tasks-log
+                        //need to get the relevant info from other tables
 
 this.userId = me.id;

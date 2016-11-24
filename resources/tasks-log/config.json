@@ -1,0 +1,53 @@
+{
+	"type": "Collection",
+	"properties": {
+		"taskId": {
+			"name": "taskId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "taskId",
+			"order": 0
+		},
+		"taskName": {
+			"name": "taskName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "taskName",
+			"order": 1
+		},
+		"tenantReplyReceived": {
+			"name": "tenantReplyReceived",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "tenantReplyReceived",
+			"order": 2
+		},
+		"completionValidatedByAdmin": {
+			"name": "completionValidatedByAdmin",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "completionValidatedByAdmin",
+			"order": 3
+		},
+		"dateAssigned": {
+			"name": "dateAssigned",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "dateAssigned",
+			"order": 4
+		},
+		"dateReplied": {
+			"name": "dateReplied",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "dateReplied",
+			"order": 5
+		}
+	}
+}

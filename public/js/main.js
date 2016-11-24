@@ -86,11 +86,10 @@
 
 	  headerTemplate(nga, admin);
 	  nga.configure(admin);
-
 	  admin.menu(nga.menu().addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')).addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>')));
 	}]);
 
-	__webpack_require__(13)(app);
+	__webpack_require__(11)(app);
 	__webpack_require__(12)(app);
 
 /***/ },
@@ -209,9 +208,6 @@
 /* 5 */
 /***/ function(module, exports) {
 
-<<<<<<< HEAD
-	module.exports = (nga, admin, tasks) => {
-=======
 	module.exports = (nga, admin) => {
 	  const user = nga.entity('users');
 
@@ -235,7 +231,6 @@
 /***/ function(module, exports) {
 
 	module.exports = (nga, admin) => {
->>>>>>> master
 	  const message = nga.entity('messages');
 
 	  message.listView().fields([nga.field('id'), nga.field('from'), nga.field('message'), nga.field('timestamp', 'datetime').label('Date').format('dd-MM-yyyy HH:mm:ss')]);
@@ -254,7 +249,8 @@
 
 	  dpd.on('apiError', () => {
 	    // eslint-disable-next-line no-alert
-	    window.alert('Error: Nexmo key missing. See project readme for correct way to execute application');
+	    window.alert(`Error: Nexmo key missing. See project readme for
+	      correct way to execute application`);
 	  });
 
 	  return message;
@@ -352,54 +348,7 @@
 	};
 
 /***/ },
-/* 11 */,
-/* 12 */
-/***/ function(module, exports) {
-
-<<<<<<< HEAD
-	module.exports = (nga, admin) => {
-	  const headerTemplate = `<div class="navbar-header">
-	      <a class="navbar-brand" href="#" ng-click="appController.displayHome()">
-	        RoundAbout
-	      </a>
-	    </div>
-	    <p class="navbar-text navbar-right" id="logout" ng-click>
-	      <logout />
-	    </p>
-	       `;
-
-	  admin.header(headerTemplate);
-	};
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	module.exports = app => app.factory('serializeParams', [() => {
-	  const request = config => {
-	    const paramSerializer = param => param;
-	    const params = JSON.stringify(config.params) || '';
-	    return Object.assign({}, config, { paramSerializer, params });
-=======
-	module.exports = app => app.directive('logout', ['$http', $http => {
-	  const directive = {
-	    restrict: 'E',
-	    template: '<div><span class="glyphicon glyphicon-user"></span>&nbsp;Logout</div>',
-	    link(scope, element) {
-	      element.on('click', () => {
-	        $http.post('/users/logout').then(() => {
-	          window.location.href = '/';
-	        });
-	      });
-	    }
->>>>>>> master
-	  };
-
-	  return directive;
-	}]);
-
-/***/ },
-/* 13 */
+/* 11 */
 /***/ function(module, exports) {
 
 	module.exports = app => app.config(['RestangularProvider', RestangularProvider => {
@@ -447,9 +396,8 @@
 	  });
 	}]);
 
-<<<<<<< HEAD
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = app => app.directive('logout', ['$http', $http => {
@@ -468,7 +416,5 @@
 	  return directive;
 	}]);
 
-=======
->>>>>>> master
 /***/ }
 /******/ ]);
