@@ -85,7 +85,6 @@
 	  const tasks = tasksEntity(nga, admin);
 
 	  headerTemplate(nga, admin);
-
 	  nga.configure(admin);
 
 	  admin.menu(nga.menu().addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')).addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>')));
@@ -210,6 +209,9 @@
 /* 5 */
 /***/ function(module, exports) {
 
+<<<<<<< HEAD
+	module.exports = (nga, admin, tasks) => {
+=======
 	module.exports = (nga, admin) => {
 	  const user = nga.entity('users');
 
@@ -233,13 +235,14 @@
 /***/ function(module, exports) {
 
 	module.exports = (nga, admin) => {
+>>>>>>> master
 	  const message = nga.entity('messages');
 
 	  message.listView().fields([nga.field('id'), nga.field('from'), nga.field('message'), nga.field('timestamp', 'datetime').label('Date').format('dd-MM-yyyy HH:mm:ss')]);
 
 	  message.creationView().fields([nga.field('from'), nga.field('to', 'reference_many').targetEntity(nga.entity('contacts')).targetField(nga.field('fullName')).validation({
 	    required: true
-	  }), nga.field('message', 'text').validation({
+	  }), nga.field('task', 'reference_many').targetEntity(nga.entity('tasks')).targetField(nga.field('taskName')), nga.field('message', 'text').validation({
 	    required: true
 	  })]);
 
@@ -353,6 +356,31 @@
 /* 12 */
 /***/ function(module, exports) {
 
+<<<<<<< HEAD
+	module.exports = (nga, admin) => {
+	  const headerTemplate = `<div class="navbar-header">
+	      <a class="navbar-brand" href="#" ng-click="appController.displayHome()">
+	        RoundAbout
+	      </a>
+	    </div>
+	    <p class="navbar-text navbar-right" id="logout" ng-click>
+	      <logout />
+	    </p>
+	       `;
+
+	  admin.header(headerTemplate);
+	};
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	module.exports = app => app.factory('serializeParams', [() => {
+	  const request = config => {
+	    const paramSerializer = param => param;
+	    const params = JSON.stringify(config.params) || '';
+	    return Object.assign({}, config, { paramSerializer, params });
+=======
 	module.exports = app => app.directive('logout', ['$http', $http => {
 	  const directive = {
 	    restrict: 'E',
@@ -364,6 +392,7 @@
 	        });
 	      });
 	    }
+>>>>>>> master
 	  };
 
 	  return directive;
@@ -418,5 +447,28 @@
 	  });
 	}]);
 
+<<<<<<< HEAD
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = app => app.directive('logout', ['$http', $http => {
+	  const directive = {
+	    restrict: 'E',
+	    template: '<div><span class="glyphicon glyphicon-user"></span>&nbsp;Logout</div>',
+	    link(scope, element) {
+	      element.on('click', () => {
+	        $http.post('/users/logout').then(() => {
+	          window.location.href = '/';
+	        });
+	      });
+	    }
+	  };
+
+	  return directive;
+	}]);
+
+=======
+>>>>>>> master
 /***/ }
 /******/ ]);
