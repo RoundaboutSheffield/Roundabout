@@ -1,3 +1,4 @@
+config.env
 .dpd
 .sass-cache
 node_modules
