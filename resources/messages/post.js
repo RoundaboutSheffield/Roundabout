@@ -27,8 +27,8 @@ dpd.contacts.get({id: {$in:to} })
   .then(()=>dpd.users.get({number: to}))
   .then((res)=>{
     console.log(res);
-    let { tenantId, username } = res[0]
-    return dpd.taskslog.post({task: task, dateAssigned:Date.now(), tenantId: tenantId, tenantName: username})
+    let { id, username } = res[0]
+    return dpd.taskslog.post({task: task, dateAssigned:Date.now(), tenantId: id, tenantName: username})
   })
   .then( res => console.log(res) )
   .catch( e => console.log(e) )
