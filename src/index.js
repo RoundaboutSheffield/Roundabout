@@ -32,8 +32,7 @@ const app = angular.module('roundAbout', ['ng-admin'])
       .addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>'))
       .addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>'))
       .addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>'))
-      .addChild(nga.menu(logger).icon('<span class="glyphicon glyphicon-calendar"></span>'))
-    )
+      .addChild(nga.menu(logger).icon('<span class="glyphicon glyphicon-calendar"></span>')));
   }]);
 
 require('./config/restangularConfig')(app);
