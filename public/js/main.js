@@ -338,7 +338,9 @@
 	module.exports = (nga, admin) => {
 	  const task = nga.entity('taskslog');
 
-	  task.listView().fields([nga.field('taskName'), nga.field('tenantName'), nga.field('dateAssigned', 'datetime').format('dd-MM-yyyy HH:mm:ss'), nga.field('tenantReplyReceived'), nga.field('completionValidatedByAdmin')]);
+	  const fields = [nga.field('tasksName'), nga.field('tenantName'), nga.field('dateAssigned'), nga.field('tenantReplyReceived'), nga.field('completionValidateByAdmin')];
+
+	  task.listView().fields([nga.field('taskName'), nga.field('tenantName'), nga.field('dateAssigned', 'datetime').format('dd-MM-yyyy HH:mm:ss'), nga.field('tenantReplyReceived'), nga.field('completionValidatedByAdmin')]).filters(fields);
 
 	  admin.addEntity(task);
 
