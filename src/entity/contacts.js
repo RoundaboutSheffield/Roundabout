@@ -1,3 +1,5 @@
+const phonePattern = /\+44[1-9]\d{6,9}$/;   // eslint-disable-line no-useless-escape
+
 module.exports = (nga, admin) => {
   const contact = nga.entity('contacts');
 
@@ -10,6 +12,7 @@ module.exports = (nga, admin) => {
     nga.field('phoneNumber')
       .validation({
         required: true,
+        pattern: phonePattern,
       }),
     nga.field('userId', 'reference')
       .targetEntity(nga.entity('users'))
@@ -21,7 +24,11 @@ module.exports = (nga, admin) => {
     .fields([
       nga.field('fullName')
         .isDetailLink(true),
-      nga.field('phoneNumber'),
+      nga.field('phoneNumber')
+      .validation({
+        required: true,
+        pattern: phonePattern,
+      }),
     ])
     .filters(fields);
 
