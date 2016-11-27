@@ -73,7 +73,8 @@
 	const contactEntity = __webpack_require__(7);
 	const appointmentEntity = __webpack_require__(8);
 	const tasksEntity = __webpack_require__(9);
-	const headerTemplate = __webpack_require__(10);
+	const logsEntity = __webpack_require__(10);
+	const headerTemplate = __webpack_require__(11);
 
 	const app = angular.module('roundAbout', ['ng-admin']).config(['NgAdminConfigurationProvider', nga => {
 	  const admin = nga.application('RoundAbout');
@@ -83,14 +84,15 @@
 	  const contact = contactEntity(nga, admin);
 	  const appointment = appointmentEntity(nga, admin);
 	  const tasks = tasksEntity(nga, admin);
+	  const logger = logsEntity(nga, admin);
 
 	  headerTemplate(nga, admin);
 	  nga.configure(admin);
-	  admin.menu(nga.menu().addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')).addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>')));
+	  admin.menu(nga.menu().addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(contact).icon('<span class="glyphicon glyphicon-user"></span>')).addChild(nga.menu(message).icon('<span class="glyphicon glyphicon-envelope"></span>')).addChild(nga.menu(appointment).icon('<span class="glyphicon glyphicon-calendar"></span>')).addChild(nga.menu(tasks).icon('<span class="glyphicon glyphicon-calendar"></span>')).addChild(nga.menu(logger).icon('<span class="glyphicon glyphicon-calendar"></span>')));
 	}]);
 
-	__webpack_require__(11)(app);
 	__webpack_require__(12)(app);
+	__webpack_require__(13)(app);
 
 /***/ },
 /* 4 */
@@ -334,6 +336,25 @@
 /***/ function(module, exports) {
 
 	module.exports = (nga, admin) => {
+	  const task = nga.entity('taskslog');
+
+	  task.listView().fields([nga.field('taskName'), nga.field('tenantReplyReceived'), nga.field('completionValidatedByAdmin')]);
+
+	  admin.addEntity(task);
+
+	  dpd.on('apiError', () => {
+	    // eslint-disable-next-line no-alert
+	    alert('Error: Nexmo key missing. See project readme for correct way to execute application');
+	  });
+
+	  return task;
+	};
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = (nga, admin) => {
 	  const headerTemplate = `<div class="navbar-header">
 	      <a class="navbar-brand" href="#" ng-click="appController.displayHome()">
 	        RoundAbout
@@ -348,7 +369,7 @@
 	};
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = app => app.config(['RestangularProvider', RestangularProvider => {
@@ -397,7 +418,7 @@
 	}]);
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports = app => app.directive('logout', ['$http', $http => {
