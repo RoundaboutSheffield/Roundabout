@@ -5,14 +5,12 @@ const apiSecret = process().env.NEXMO_SECRET;
 const debug = process().env.DEBUG;
 
 if (!apiKey || !apiSecret){
-    emit('apiError')
-    cancel('Missing API key')
+  emit('apiError')
+  cancel('Missing API key')
 }
 
 const nexmo = new Nexmo({ apiKey, apiSecret }, { debug });
 const { from, to, message, task } = this; //make sure you get task
-console.log(this)
-
 
 this.timestamp = Date.now();
 
@@ -20,9 +18,21 @@ dpd.contacts.get({id: {$in:to} })
   .then(contacts => contacts.map(contact => contact.phoneNumber))
   .then(phoneNumbers => {
     phoneNumbers.forEach(phone =>
-      nexmo.message.sendSms(from, phone, message, {debug:true}, ()=>'http://http://localhost:3100/inboundsms'));
+      nexmo.message.sendSms(from, phone, message, {debug:true}, ()=>{}));
   })
-  .then(()=>console.log()) //here update the tasks-log
-                        //need to get the relevant info from other tables
+  .then((res)=>{
+    console.log('here', from, to, message, this)
+    console.log('message was sent')
+  })
+  .then(()=>dpd.users.get({number: to}))
+  .then((res)=>{
+    console.log(res);
+    let { tenantId, username } = res[0]
+    return dpd.taskslog.post({task: task, dateAssigned:Date.now(), tenantId: tenantId, tenantName: username})
+  })
+  .then( res => console.log(res) )
+  .catch( e => console.log(e) )
+
+
 
 this.userId = me.id;
