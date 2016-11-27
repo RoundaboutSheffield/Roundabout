@@ -1,4 +1,4 @@
-const phonePattern = /\+44[1-9]\d{7,10}$/;   // eslint-disable-line no-useless-escape
+const phonePattern = /\+44[1-9]\d{6,9}$/;   // eslint-disable-line no-useless-escape
 
 module.exports = (nga, admin) => {
   const contact = nga.entity('contacts');
