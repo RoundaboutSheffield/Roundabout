@@ -51,16 +51,16 @@
 		},
 		"dateAssigned": {
 			"name": "dateAssigned",
-			"type": "string",
-			"typeLabel": "string",
+			"type": "number",
+			"typeLabel": "number",
 			"required": false,
 			"id": "dateAssigned",
 			"order": 6
 		},
 		"dateReplied": {
 			"name": "dateReplied",
-			"type": "string",
-			"typeLabel": "string",
+			"type": "number",
+			"typeLabel": "number",
 			"required": false,
 			"id": "dateReplied",
 			"order": 7
