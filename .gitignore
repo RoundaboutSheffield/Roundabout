@@ -4,3 +4,4 @@ node_modules
 data
 **/*.DS_Store
 npm-debug.log
+public/js/main.js
