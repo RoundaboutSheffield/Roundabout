@@ -1,21 +1,37 @@
 {
 	"type": "Collection",
 	"properties": {
+		"tenantId": {
+			"name": "tenantId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "tenantId",
+			"order": 0
+		},
+		"tenantName": {
+			"name": "tenantName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "tenantName",
+			"order": 1
+		},
 		"taskId": {
 			"name": "taskId",
 			"type": "string",
 			"typeLabel": "string",
-			"required": true,
+			"required": false,
 			"id": "taskId",
-			"order": 0
+			"order": 2
 		},
 		"taskName": {
 			"name": "taskName",
 			"type": "string",
 			"typeLabel": "string",
-			"required": true,
+			"required": false,
 			"id": "taskName",
-			"order": 1
+			"order": 3
 		},
 		"tenantReplyReceived": {
 			"name": "tenantReplyReceived",
@@ -23,7 +39,7 @@
 			"typeLabel": "boolean",
 			"required": false,
 			"id": "tenantReplyReceived",
-			"order": 2
+			"order": 4
 		},
 		"completionValidatedByAdmin": {
 			"name": "completionValidatedByAdmin",
@@ -31,23 +47,23 @@
 			"typeLabel": "boolean",
 			"required": false,
 			"id": "completionValidatedByAdmin",
-			"order": 3
+			"order": 5
 		},
 		"dateAssigned": {
 			"name": "dateAssigned",
 			"type": "string",
 			"typeLabel": "string",
-			"required": true,
+			"required": false,
 			"id": "dateAssigned",
-			"order": 4
+			"order": 6
 		},
 		"dateReplied": {
 			"name": "dateReplied",
 			"type": "string",
 			"typeLabel": "string",
-			"required": true,
+			"required": false,
 			"id": "dateReplied",
-			"order": 5
+			"order": 7
 		}
 	}
 }
