@@ -4,7 +4,6 @@ module.exports = (nga, admin) => {
   message.listView()
   .fields([
     nga.field('id'),
-    nga.field('from'),
     nga.field('message'),
     nga.field('timestamp', 'datetime')
     .label('Date')
@@ -13,7 +12,6 @@ module.exports = (nga, admin) => {
 
   message.creationView()
   .fields([
-    nga.field('from'),
     nga.field('to', 'reference_many')
     .targetEntity(nga.entity('contacts'))
     .targetField(nga.field('fullName'))
@@ -33,7 +31,6 @@ module.exports = (nga, admin) => {
 
   message.showView()
   .fields([
-    nga.field('from'),
     nga.field('to', 'reference_many')
     .targetEntity(nga.entity('contacts'))
     .targetField(nga.field('fullName'))
