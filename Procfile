@@ -1,1 +1,1 @@
-web: npm start
+web: dpd keygen && dpd showkey && npm start
