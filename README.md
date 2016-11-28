@@ -33,3 +33,5 @@ $ NEXMO_KEY=YOUR_API_CODE NEXMO_SECRET=YOUR_API_SECRET npm run watch
 
 Wait until browser shows up
 
+## nexmo virtual nulber
+447507329934
