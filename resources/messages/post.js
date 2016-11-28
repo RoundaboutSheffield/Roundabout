@@ -3,7 +3,7 @@ console.log(process().env)
 const apiKey = process().env.NEXMO_KEY;
 const apiSecret = process().env.NEXMO_SECRET;
 const debug = process().env.DEBUG;
-const senderNumber = process().env.NEXMO_VIRTUAL_NUMBER;
+const senderNumber = '+447507329934';
 
 if (!apiKey || !apiSecret){
   emit('apiError')
