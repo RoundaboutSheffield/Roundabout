@@ -1,0 +1,69 @@
+{
+	"type": "Collection",
+	"properties": {
+		"tenantId": {
+			"name": "tenantId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "tenantId",
+			"order": 0
+		},
+		"tenantName": {
+			"name": "tenantName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "tenantName",
+			"order": 1
+		},
+		"taskId": {
+			"name": "taskId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "taskId",
+			"order": 2
+		},
+		"taskName": {
+			"name": "taskName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "taskName",
+			"order": 3
+		},
+		"tenantReplyReceived": {
+			"name": "tenantReplyReceived",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "tenantReplyReceived",
+			"order": 4
+		},
+		"completionValidatedByAdmin": {
+			"name": "completionValidatedByAdmin",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "completionValidatedByAdmin",
+			"order": 5
+		},
+		"dateAssigned": {
+			"name": "dateAssigned",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "dateAssigned",
+			"order": 6
+		},
+		"dateReplied": {
+			"name": "dateReplied",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "dateReplied",
+			"order": 7
+		}
+	}
+}
