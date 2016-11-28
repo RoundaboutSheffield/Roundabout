@@ -3,6 +3,7 @@ console.log(process().env)
 const apiKey = process().env.NEXMO_KEY;
 const apiSecret = process().env.NEXMO_SECRET;
 const debug = process().env.DEBUG;
+const senderNumber = process().env.NEXMO_VIRTUAL_NUMBER;
 
 if (!apiKey || !apiSecret){
   emit('apiError')
@@ -18,7 +19,7 @@ dpd.contacts.get({id: {$in:to} })
   .then(contacts => contacts.map(contact => contact.phoneNumber))
   .then(phoneNumbers => {
     phoneNumbers.forEach(phone =>
-      nexmo.message.sendSms(from, phone, message, {debug:true}, ()=>{}));
+      nexmo.message.sendSms(senderNumber, phone, message, {debug:true}, ()=>{}));
   })
   .then((res)=>{
     console.log('here', from, to, message, this)
@@ -32,7 +33,5 @@ dpd.contacts.get({id: {$in:to} })
   })
   .then( res => console.log(res) )
   .catch( e => console.log(e) )
-
-
 
 this.userId = me.id;
