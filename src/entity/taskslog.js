@@ -2,9 +2,13 @@ module.exports = (nga, admin) => {
   const taskLog = nga.entity('taskslog');
 
   const fields = [
-    nga.field('taskName'),
-    nga.field('tenantName')
+    nga.field('taskId', 'reference')
+      .targetEntity(nga.entity('tasks'))
+      .targetField(nga.field('taskName'))
       .isDetailLink(true),
+    nga.field('tenantId', 'reference')
+      .targetEntity(nga.entity('users'))
+      .targetField(nga.field('username')),
     nga.field('dateAssigned', 'datetime')
       .format('dd-MM-yyyy HH:mm:ss'),
     nga.field('tenantReplyReceived'),
