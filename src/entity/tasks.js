@@ -13,7 +13,12 @@ module.exports = (nga, admin) => {
     .fields([
       nga.field('taskName').validation({ required: true }),
       nga.field('points').validation({ required: true }),
-      nga.field('inCollege', 'boolean'),
+      nga.field('inCollege', 'boolean')
+      .choices([
+          { value: true, label: 'true' },
+          { value: false, label: 'false' },
+      ]),
+
       nga.field('details', 'text').validation({ required: true }),
     ]);
 

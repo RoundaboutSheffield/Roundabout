@@ -21,7 +21,7 @@ this.timestamp = Date.now();
 dpd.contacts.get({id: to})
   .then(contact => {
     if (apiKey) {
-      nexmo.message.sendSms(SENDER_NUMBER, contact.phoneNumber, 'wtf', { debug:true }, noop);
+      nexmo.message.sendSms(SENDER_NUMBER, contact.phoneNumber, message, { debug:true }, noop);
     }
     return contact.userId;
   })
