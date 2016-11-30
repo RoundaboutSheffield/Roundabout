@@ -1,23 +1,46 @@
+const allFields = fields => Object.keys(fields).map(k => fields[k]);
+const withoutFields = (excludes, fields) =>
+  Object.keys(fields).filter(k => excludes.every(v => k !== v)).map(k => fields[k]);
+
 module.exports = (nga, admin) => {
   const taskLog = nga.entity('taskslog');
 
-  const fields = [
-    nga.field('taskName'),
-    nga.field('tenantName')
+  const fields = {
+    id: nga.field('id')
       .isDetailLink(true),
-    nga.field('dateAssigned', 'datetime')
+
+    taskId: nga.field('taskId', 'reference')
+      .targetEntity(nga.entity('tasks'))
+      .targetField(nga.field('taskName'))
+      .isDetailLink(true),
+
+    tenantId: nga.field('tenantId', 'reference')
+      .targetEntity(nga.entity('users'))
+      .targetField(nga.field('username')),
+
+    dateAssigned: nga.field('dateAssigned', 'datetime')
       .format('dd-MM-yyyy HH:mm:ss'),
-    nga.field('tenantReplyReceived'),
-    nga.field('completionValidatedByAdmin'),
-  ];
+
+    tenantReplyReceived: nga.field('tenantReplyReceived', 'boolean')
+      .choices([
+          { value: true, label: 'true' },
+          { value: false, label: 'false' },
+      ]),
+
+    completionValidatedByAdmin: nga.field('completionValidatedByAdmin', 'boolean')
+      .choices([
+          { value: true, label: 'true' },
+          { value: false, label: 'false' },
+      ]),
+  };
 
 
   taskLog.listView()
-    .fields(fields)
-    .filters(fields);
+    .fields(allFields(fields))
+    .filters(allFields(fields));
 
   taskLog.editionView()
-    .fields(fields);
+    .fields(withoutFields(['dateAssigned'], fields));
 
   admin.addEntity(taskLog);
 
