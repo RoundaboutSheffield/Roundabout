@@ -6,7 +6,7 @@ module.exports = (nga, admin) => {
     .validation({
       required: true,
     }),
-    nga.field('password'),
+    nga.field('password', 'password'),
     nga.field('isAdmin', 'boolean')
       .choices([
           { value: true, label: 'true' },
