@@ -9,29 +9,13 @@
 			"id": "tenantId",
 			"order": 0
 		},
-		"tenantName": {
-			"name": "tenantName",
-			"type": "string",
-			"typeLabel": "string",
-			"required": false,
-			"id": "tenantName",
-			"order": 1
-		},
 		"taskId": {
 			"name": "taskId",
 			"type": "string",
 			"typeLabel": "string",
 			"required": false,
 			"id": "taskId",
-			"order": 2
-		},
-		"taskName": {
-			"name": "taskName",
-			"type": "string",
-			"typeLabel": "string",
-			"required": false,
-			"id": "taskName",
-			"order": 3
+			"order": 1
 		},
 		"tenantReplyReceived": {
 			"name": "tenantReplyReceived",
@@ -39,7 +23,7 @@
 			"typeLabel": "boolean",
 			"required": false,
 			"id": "tenantReplyReceived",
-			"order": 4
+			"order": 2
 		},
 		"completionValidatedByAdmin": {
 			"name": "completionValidatedByAdmin",
@@ -47,7 +31,7 @@
 			"typeLabel": "boolean",
 			"required": false,
 			"id": "completionValidatedByAdmin",
-			"order": 5
+			"order": 3
 		},
 		"dateAssigned": {
 			"name": "dateAssigned",
@@ -55,7 +39,7 @@
 			"typeLabel": "number",
 			"required": false,
 			"id": "dateAssigned",
-			"order": 6
+			"order": 4
 		},
 		"dateReplied": {
 			"name": "dateReplied",
@@ -63,7 +47,7 @@
 			"typeLabel": "number",
 			"required": false,
 			"id": "dateReplied",
-			"order": 7
+			"order": 5
 		}
 	}
 }

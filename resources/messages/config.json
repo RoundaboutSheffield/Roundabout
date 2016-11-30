@@ -1,21 +1,13 @@
 {
 	"type": "Collection",
 	"properties": {
-		"from": {
-			"name": "from",
+		"to": {
+			"name": "to",
 			"type": "string",
 			"typeLabel": "string",
 			"required": true,
-			"id": "from",
-			"order": 0
-		},
-		"to": {
-			"name": "to",
-			"type": "array",
-			"typeLabel": "array",
-			"required": true,
 			"id": "to",
-			"order": 1
+			"order": 0
 		},
 		"message": {
 			"name": "message",
@@ -23,7 +15,7 @@
 			"typeLabel": "string",
 			"required": true,
 			"id": "message",
-			"order": 2
+			"order": 1
 		},
 		"timestamp": {
 			"name": "timestamp",
@@ -31,15 +23,15 @@
 			"typeLabel": "number",
 			"required": false,
 			"id": "timestamp",
-			"order": 3
+			"order": 2
 		},
-		"userId": {
-			"name": "userId",
+		"taskId": {
+			"name": "taskId",
 			"type": "string",
 			"typeLabel": "string",
-			"required": false,
-			"id": "userId",
-			"order": 4
+			"required": true,
+			"id": "taskId",
+			"order": 3
 		}
 	}
 }
