@@ -32,6 +32,14 @@
 			"required": true,
 			"id": "taskId",
 			"order": 3
+		},
+		"sent": {
+			"name": "sent",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "sent",
+			"order": 4
 		}
 	}
 }
