@@ -1,37 +1,31 @@
 const Nexmo = require('nexmo');
-console.log(process().env)
 const apiKey = process().env.NEXMO_KEY;
 const apiSecret = process().env.NEXMO_SECRET;
 const debug = process().env.DEBUG;
-const senderNumber = process().env.NEXMO_VIRTUAL_NUMBER;
+const SENDER_NUMBER = process().env.NEXMO_VIRTUAL_NUMBER;
+
+const nexmo = new Nexmo({ apiKey, apiSecret }, { debug });
 
 if (!apiKey || !apiSecret){
   emit('apiError')
   cancel('Missing API key')
 }
 
-const nexmo = new Nexmo({ apiKey, apiSecret }, { debug });
-const { from, to, message, task } = this; //make sure you get task
+const noop = () => {};
+const trace = desc => data => { console.log(desc, data); return data; };
+
+const { to, message, id, taskId } = this; //make sure you get task
 
 this.timestamp = Date.now();
 
-dpd.contacts.get({id: {$in:to} })
-  .then(contacts => contacts.map(contact => contact.phoneNumber))
-  .then(phoneNumbers => {
-    phoneNumbers.forEach(phone =>
-      nexmo.message.sendSms(senderNumber, phone, message, {debug:true}, ()=>{}));
+dpd.contacts.get({id: to})
+  .then(contact => {
+    if (apiKey) {
+      nexmo.message.sendSms(SENDER_NUMBER, contact.phoneNumber, 'wtf', { debug:true }, noop);
+    }
+    return contact.userId;
   })
-  .then((res)=>{
-    console.log('here', from, to, message, this)
-    console.log('message was sent')
-  })
-  .then(()=>dpd.users.get({number: to}))
-  .then((res)=>{
-    console.log(res);
-    let { id, username } = res[0]
-    return dpd.taskslog.post({task: task, dateAssigned:Date.now(), tenantId: id, tenantName: username})
-  })
-  .then( res => console.log(res) )
-  .catch( e => console.log(e) )
-
-this.userId = me.id;
+  .then((userId) =>
+    dpd.taskslog.post({taskId: taskId, dateAssigned: Date.now(), tenantId: userId }))
+  .then(trace('Update taskslog success:'))
+  .catch(trace('Update taskslog error:'));
