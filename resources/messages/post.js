@@ -1,31 +1,23 @@
-const Nexmo = require('nexmo');
-const apiKey = process().env.NEXMO_KEY;
-const apiSecret = process().env.NEXMO_SECRET;
-const debug = process().env.DEBUG;
-const SENDER_NUMBER = process().env.NEXMO_VIRTUAL_NUMBER;
+const sendMessage = require('../../lib/send_message');
+const prop = require('../../lib/prop');
+const trace = require('../../lib/trace');
 
-const nexmo = new Nexmo({ apiKey, apiSecret }, { debug });
-
-if (!apiKey || !apiSecret){
-  emit('apiError')
-  cancel('Missing API key')
-}
-
-const noop = () => {};
-const trace = desc => data => { console.log(desc, data); return data; };
-
-const { to, message, id, taskId } = this; //make sure you get task
-
+// Set timestamp to now
 this.timestamp = Date.now();
 
-dpd.contacts.get({id: to})
-  .then(contact => {
-    if (apiKey) {
-      nexmo.message.sendSms(SENDER_NUMBER, contact.phoneNumber, message, { debug:true }, noop);
-    }
-    return contact.userId;
-  })
-  .then((userId) =>
-    dpd.taskslog.post({taskId: taskId, dateAssigned: Date.now(), tenantId: userId }))
-  .then(trace('Update taskslog success:'))
-  .catch(trace('Update taskslog error:'));
+// Grab fields from newly inserted record
+const { to, message, taskId } = this;
+
+// Get contact by message.to
+const contactPromise = dpd.contacts.get({id: to});
+
+const getUserIdFromContact = () => contactPromise.then(prop('userId'));
+const updateTasksLog = tenantId => dpd.taskslog.post({ taskId, dateAssigned: Date.now(), tenantId });
+
+
+contactPromise
+  .then(prop('phoneNumber'))
+  .then(sendMessage(message))
+  .then(getUserIdFromContact)
+  .then(updateTasksLog)
+  .catch(trace('Message error:'));
