@@ -48,6 +48,14 @@
 			"required": false,
 			"id": "dateReplied",
 			"order": 5
+		},
+		"uid": {
+			"name": "uid",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "uid",
+			"order": 6
 		}
 	}
 }
