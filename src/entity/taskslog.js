@@ -6,7 +6,7 @@ module.exports = (nga, admin) => {
   const taskLog = nga.entity('taskslog');
 
   const fields = {
-    id: nga.field('id')
+    id: nga.field('uid')
       .isDetailLink(true),
 
     taskId: nga.field('taskId', 'reference')

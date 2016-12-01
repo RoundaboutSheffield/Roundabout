@@ -1,7 +1,7 @@
-console.log('running cron job....');
+// console.log('running cron job....');
 
-dpd.messages.get({ sent: true })
-  .then(data => console.log(data));
+// dpd.messages.get({ sent: true })
+//   .then(data => console.log(data));
 
 // console.log('cron running');
 
