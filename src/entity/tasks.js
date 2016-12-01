@@ -3,13 +3,27 @@ module.exports = (nga, admin) => {
 
   task.listView()
     .fields([
-      nga.field('taskName'),
+      nga.field('taskName')
+        .isDetailLink(true),
       nga.field('details'),
       nga.field('inCollege'),
       nga.field('points'),
     ]);
 
   task.creationView()
+    .fields([
+      nga.field('taskName').validation({ required: true }),
+      nga.field('points').validation({ required: true }),
+      nga.field('inCollege', 'boolean')
+      .choices([
+          { value: true, label: 'true' },
+          { value: false, label: 'false' },
+      ]),
+
+      nga.field('details', 'text').validation({ required: true }),
+    ]);
+
+  task.editionView()
     .fields([
       nga.field('taskName').validation({ required: true }),
       nga.field('points').validation({ required: true }),
