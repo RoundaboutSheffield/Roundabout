@@ -9,7 +9,10 @@ module.exports = (nga, admin) => {
     .targetEntity(nga.entity('contacts'))
     .targetField(nga.field('fullName')),
 
-    nga.field('message'),
+    nga.field('taskId', 'reference')
+    .targetEntity(nga.entity('tasks'))
+    .targetField(nga.field('taskName')),
+    // nga.field('message'),
 
     nga.field('timestamp', 'datetime')
     .label('Date')
@@ -29,10 +32,10 @@ module.exports = (nga, admin) => {
     .targetEntity(nga.entity('tasks'))
     .targetField(nga.field('taskName')),
 
-    nga.field('message', 'text')
-    .validation({
-      required: true,
-    }),
+    // nga.field('message', 'text')
+    // .validation({
+    //   required: true,
+    // }),
   ]);
 
   message.showView()
