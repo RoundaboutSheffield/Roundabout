@@ -1,0 +1,13 @@
+{
+	"type": "Collection",
+	"properties": {
+		"nextId": {
+			"name": "nextId",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "nextId",
+			"order": 0
+		}
+	}
+}

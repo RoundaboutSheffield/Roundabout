@@ -9,21 +9,13 @@
 			"id": "to",
 			"order": 0
 		},
-		"message": {
-			"name": "message",
-			"type": "string",
-			"typeLabel": "string",
-			"required": true,
-			"id": "message",
-			"order": 1
-		},
 		"timestamp": {
 			"name": "timestamp",
 			"type": "number",
 			"typeLabel": "number",
 			"required": false,
 			"id": "timestamp",
-			"order": 2
+			"order": 1
 		},
 		"taskId": {
 			"name": "taskId",
@@ -31,7 +23,7 @@
 			"typeLabel": "string",
 			"required": true,
 			"id": "taskId",
-			"order": 3
+			"order": 2
 		},
 		"sent": {
 			"name": "sent",
@@ -39,7 +31,7 @@
 			"typeLabel": "boolean",
 			"required": false,
 			"id": "sent",
-			"order": 4
+			"order": 3
 		}
 	}
 }
