@@ -8,6 +8,7 @@ const sources = [
 ];
 
 module.exports = {
+  devtool: 'source-map',
   entry: sources,
   output: {
     path: __dirname + '/public/js',

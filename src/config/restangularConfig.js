@@ -1,4 +1,4 @@
-const { prop, pick, mergeAll, compose, forEach, keys, evolve } = require('ramda');
+const { prop, pick, mergeAll, compose, evolve } = require('ramda');
 
 const dir = direction =>
   (direction === 'DESC'
@@ -32,11 +32,6 @@ const setRegExFilters =
 
 const filters = compose(setRegExFilters, prop('_filters'));
 
-const cleanseParams = (obj) => {
-  forEach(k => delete obj[k], keys(obj));
-  return obj;
-};
-
 module.exports = app =>
   app
   .config(['RestangularProvider', (RestangularProvider) => {
@@ -48,6 +43,8 @@ module.exports = app =>
           $skip(params),
           $limit(params),
         ]);
-        Object.assign(cleanseParams(params), newParams);
+        // console.log('Ng Admin params', params);
+        // console.log('Deployd params', newParams);
+        return { params: newParams };
       });
   }]);
