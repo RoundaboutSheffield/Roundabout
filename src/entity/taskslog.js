@@ -15,8 +15,8 @@ module.exports = (nga, admin) => {
       .isDetailLink(true),
 
     tenantId: nga.field('tenantId', 'reference')
-      .targetEntity(nga.entity('users'))
-      .targetField(nga.field('username')),
+      .targetEntity(nga.entity('contacts'))
+      .targetField(nga.field('fullName')),
 
     dateAssigned: nga.field('dateAssigned', 'datetime')
       .format('dd-MM-yyyy HH:mm:ss'),

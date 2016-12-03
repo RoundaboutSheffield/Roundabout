@@ -32,6 +32,14 @@
 			"required": false,
 			"id": "userId",
 			"order": 3
+		},
+		"fullName": {
+			"name": "fullName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "fullName",
+			"order": 4
 		}
 	}
 }

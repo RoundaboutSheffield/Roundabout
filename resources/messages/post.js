@@ -40,8 +40,8 @@ const run = () => {
   const updateTasksLog = ([tenantId, uid]) =>
     dpd.taskslog.post({ taskId, dateAssigned: Date.now(), tenantId, uid });
 
-  const getTasksLogDetails = ([{ userId }, uid]) =>
-    [userId, uid];
+  const getTasksLogDetails = ([{ id }, uid]) =>
+    [id, uid];
 
   const getMessageData = ({ uid }) =>
     Promise.all([
