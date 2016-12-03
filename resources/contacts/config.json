@@ -40,13 +40,6 @@
 			"required": false,
 			"id": "fullName",
 			"order": 4
-		},
-    "points":{
-			"name": "points",
-			"type": "number",
-			"typeLabel": "number",
-			"required": false,
-			"id": "points",
-			"order": 5
-		}	}
+		}
+	}
 }
