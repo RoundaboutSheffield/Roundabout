@@ -56,6 +56,14 @@
 			"required": false,
 			"id": "uid",
 			"order": 6
+		},
+		"points": {
+			"name": "points",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "points",
+			"order": 7
 		}
 	}
 }

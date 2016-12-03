@@ -37,6 +37,7 @@ module.exports = app =>
   .config(['RestangularProvider', (RestangularProvider) => {
     RestangularProvider.addFullRequestInterceptor(
       (element, operation, what, url, headers, params) => {
+        if (operation !== 'getList') return;
         const newParams = mergeAll([
           filters(params),
           $sort(params),
@@ -45,6 +46,6 @@ module.exports = app =>
         ]);
         // console.log('Ng Admin params', params);
         // console.log('Deployd params', newParams);
-        return { params: newParams };
+        return { params: newParams };     // eslint-disable-line consistent-return
       });
   }]);
