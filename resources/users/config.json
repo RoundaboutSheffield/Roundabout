@@ -8,6 +8,14 @@
 			"required": false,
 			"id": "isAdmin",
 			"order": 0
+		},
+		"points": {
+			"name": "points",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "points",
+			"order": 1
 		}
 	}
 }
