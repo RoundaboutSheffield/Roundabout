@@ -1,0 +1,21 @@
+{
+	"type": "Collection",
+	"properties": {
+		"tenantName": {
+			"name": "tenantName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "tenantName",
+			"order": 0
+		},
+		"points": {
+			"name": "points",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "points",
+			"order": 1
+		}
+	}
+}
