@@ -32,6 +32,8 @@ module.exports = (nga, admin) => {
           { value: true, label: 'true' },
           { value: false, label: 'false' },
       ]),
+
+    points: nga.field('points', 'number'),
   };
 
 

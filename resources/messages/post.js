@@ -37,11 +37,11 @@ const run = () => {
   const nextUidPromise = getNextUid();
 
   // Declare some helper functions
-  const updateTasksLog = ([tenantId, uid]) =>
-    dpd.taskslog.post({ taskId, dateAssigned: Date.now(), tenantId, uid });
+  const updateTasksLog = ([tenantId, uid, points]) =>
+    dpd.taskslog.post({ taskId, dateAssigned: Date.now(), tenantId, uid, points });
 
-  const getTasksLogDetails = ([{ id }, uid]) =>
-    [id, uid];
+  const getTasksLogDetails = ([{ id }, uid, { points }]) =>
+    [id, uid, points];
 
   const getMessageData = ({ uid }) =>
     Promise.all([
@@ -53,7 +53,7 @@ const run = () => {
   const buildMessage = (message, uid) =>
     `${message}\nWhen it's done reply #${uid} DONE`;
 
-  Promise.all([contactPromise, nextUidPromise])
+  Promise.all([contactPromise, nextUidPromise, taskPromise])
     .then(getTasksLogDetails)
     .then(updateTasksLog)
     .then(getMessageData)
