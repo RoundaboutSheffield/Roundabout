@@ -19,7 +19,7 @@ module.exports = (nga, admin) => {
     .fields([
       nga.field('username')
         .isDetailLink(true),
-      nga.field('totalPoints'),
+      nga.field('points'),
     ])
     .filters(fields);
 
