@@ -9,6 +9,7 @@ function redirectUser(user) {
   } else if (user) {
     location.pathname = '/user.html';
   }
+  return user;
 }
 
 function redirectIfNotAdminUser(user) {
@@ -17,6 +18,7 @@ function redirectIfNotAdminUser(user) {
   } else if (!user.isAdmin) {
     location.pathname = '/user.html';
   }
+  return user;
 }
 
 function redirectIfNotTenantUser(user) {
@@ -25,6 +27,7 @@ function redirectIfNotTenantUser(user) {
   } else if (user.isAdmin) {
     location.pathname = '/app.html';
   }
+  return user;
 }
 
 function alertError(error) {

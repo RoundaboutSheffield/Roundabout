@@ -28,7 +28,8 @@
     <script type="text/javascript" src="assets/auth.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-    getUser().then(redirectUser);
+    getUser()
+      .then(redirectUser);
 
     setTimeout(function() {
       document.querySelector('#content').style.display = 'inherit';
