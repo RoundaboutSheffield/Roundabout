@@ -6,21 +6,72 @@
   <title>RoundAbout</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body ng-app="roundAbout">
-  <div id="content" style="display: none">
-    <div>tenant dashboard...</div>
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1><span id="username"></span> points:</h1>
+      <p id="points" class="h1"></p>
+      <button id="logoutBtn" class="btn btn-danger">Logout</button>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <td>Date assigned</td><td>Date replied</td><td>Points</td>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+      </table>
+    </div>
   </div>
   <script type="text/javascript" src="dpd.js"></script>
   <script type="text/javascript" src="assets/auth.js"></script>
   <script type="text/javascript" charset="utf-8">
+  (function(){
+    var $ = document.querySelector.bind(document);
 
-  getUser()
-  .then(redirectIfNotTenantUser)
-  .then(function() {
-    setTimeout(function() {
-      document.querySelector('#content').style.display = 'inherit';
-    }, 100);
-  });
+    var logoutBtn = document.querySelector('#logoutBtn');
+
+    logoutBtn.addEventListener('click', function() {
+      dpd.users
+        .logout()
+        .then(function() {
+          location.pathname = '/';
+        })
+    });
+
+    function renderUsername(user) {
+      $('#username').innerText = user.username;
+      return user;
+    }
+
+    function renderUserPoints(user) {
+      $('#points').innerText = user.points || 0;
+      return user;
+    }
+
+    function getUserTasks(userid) {
+      return dpd.taskslog.get({tenantId: userid});
+    }
+
+    function renderTasks(tasks) {
+      return tasks.map(function(task) {
+        [
+          '<tr>',
+            '<td>', task.dateAssigned, '</td>',
+            '<td>', task.dateReplied, '</td>',
+            '<td>', task.points, '</td>',
+          '</tr>',
+        ].join();
+      });
+    }
+
+    getUser()
+      .then(redirectIfNotTenantUser)
+      .then(renderUsername)
+      .then(renderUserPoints)
+      .then(getUserTasks)
+      .then(renderTasks)
+  }());
   </script>
 </body>
 </html>
