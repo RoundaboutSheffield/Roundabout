@@ -54,11 +54,14 @@
     }
 
     function renderTasks(tasks) {
+      function toDateString(date) {
+        return (new Date(date || 0)).toLocaleDateString('en-GB');
+      }
       return tasks.map(function(task) {
         [
           '<tr>',
-            '<td>', task.dateAssigned, '</td>',
-            '<td>', task.dateReplied, '</td>',
+            '<td>', toDateString(task.dateAssigned), '</td>',
+            '<td>', toDateString(task.dateReplied), '</td>',
             '<td>', task.points, '</td>',
           '</tr>',
         ].join();
